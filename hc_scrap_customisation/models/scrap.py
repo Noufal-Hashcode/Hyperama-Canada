@@ -9,7 +9,10 @@ from odoo import models, fields
 class StockPicking(models.Model):
     _inherit = 'stock.scrap'
 
-    # country_code = fields.Char(related="company_id.account_fiscal_country_id.code")
+    scrap_reason = fields.Many2one(
+        'scrap.reason', string="Scrap Reason",
+        readonly=False, store=True,
+        help="Select Reason to Scrap")
 
     def action_view_stock_valuation_layers(self):
         self.ensure_one()
