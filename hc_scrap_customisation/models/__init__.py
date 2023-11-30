@@ -2,4 +2,5 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from . import scrap
-# from . import pos_session
+from . import scrap_reason
+from . import product_product

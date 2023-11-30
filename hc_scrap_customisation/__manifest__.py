@@ -6,7 +6,7 @@
     'name': 'Scrap Customisation',
     "author": "MKR",
     'version': '1.1',
-    'category': 'pos',
+    'category': 'stock',
     'sequence': 6,
     'summary': 'valuation layer in scrap form',
     'description': """
@@ -15,8 +15,10 @@
 """,
     'depends': ['stock', 'product','base'],
     'data': [
-
+        'security/ir.model.access.csv',
         'views/scrap_form.xml',
+        'views/product_product.xml',
+        'views/product_product.xml',
 
     ],
     'assets': {
