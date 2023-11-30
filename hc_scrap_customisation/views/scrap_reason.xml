@@ -64,7 +64,7 @@
             name="Scrap Reason"
             parent="stock.menu_stock_config_settings"
             action="hc_scrap_customisation.action_stock_scrap_reason"
-            sequence="122"/>
+            />
 
 </odoo>
 

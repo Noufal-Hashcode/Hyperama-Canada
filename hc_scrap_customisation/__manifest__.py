@@ -17,7 +17,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/scrap_form.xml',
-        'views/product_product.xml',
+        'views/scrap_reason.xml',
         'views/product_product.xml',
 
     ],
