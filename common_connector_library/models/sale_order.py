@@ -40,7 +40,7 @@ class SaleOrder(models.Model):
 
         new_record = sale_order.new(order_vals)
         # Return Pricelist- Payment terms- Invoice address- Delivery address
-        new_record.onchange_partner_id()
+        # new_record.onchange_partner_id()
         order_vals = sale_order._convert_to_write({name: new_record[name] for name in new_record._cache})
 
         # Return Fiscal Position
