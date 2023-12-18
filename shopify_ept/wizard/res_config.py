@@ -149,8 +149,8 @@ class ShopifyInstanceConfig(models.TransientModel):
                 'is_already_instance_created': True,
             })
             company = instance.shopify_company_id
-            if company.shopify_instance_onboarding_state != 'done':
-                company.set_onboarding_step_done('shopify_instance_onboarding_state')
+            # if company.shopify_instance_onboarding_state != 'done':
+            #     company.set_onboarding_step_done('shopify_instance_onboarding_state')
         return action
 
     def reset_credentials(self):
