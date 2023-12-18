@@ -46,7 +46,7 @@ class SaleOrder(models.Model):
         # Return Fiscal Position
         order_vals.update({'partner_shipping_id': vals.get('partner_shipping_id', False)})
         new_record = sale_order.new(order_vals)
-        new_record.onchange_partner_shipping_id()
+        # new_record.onchange_partner_shipping_id()
         order_vals = sale_order._convert_to_write({name: new_record[name] for name in new_record._cache})
 
         fpos = order_vals.get('fiscal_position_id') or vals.get('fiscal_position_id', False)
