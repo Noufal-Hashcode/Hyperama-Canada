@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="purchase_order_form_inherited_type" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherited.type</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='reminder']" position="after">
+                <field name="purchase_type"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+

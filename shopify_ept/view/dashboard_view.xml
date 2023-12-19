@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Dashboard View -->
+    <record id="shopify_instance_kanban_view_ept" model="ir.ui.view">
+        <field name="name">shopify instance</field>
+        <field name="model">shopify.instance.ept</field>
+        <field name="arch" type="xml">
+            <kanban
+                    class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_shopify_kanban" sample="1"
+                    create="0" style="width:450px;"
+                    banner_route="/shopify_instances/shopify_instances_onboarding_panel"
+                    js_class="ShopifyOnBoardingToggle">
+                <field name="name"/>
+                <field name="color"/>
+                <templates>
+                    <t t-name="kanban-menu">
+<!--                            <t t-if="widget.editable"><a role="menuitem" type="edit" class="dropdown-item">Edit</a></t>-->
+<!--                            <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>-->
+<!--                            <ul class="oe_kanban_colorpicker" data-field="color"/>-->
+
+                                                        <div class="row">
+                                    <div
+                                           >
+                                        <div role="menuitem" class="o_kanban_card_manage_title">
+                                            <span>Products</span>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_shopify_product_exported_ept)d"
+                                                    type="action" title="Exported"
+                                            class="dropdown-item">
+                                                Exported
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_shopify_product_not_exported_ept)d"
+                                                    type="action" title="Ready to Export" class="dropdown-item">
+                                                Ready to Export
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_shopify_product_published_ept)d"
+                                                    type="action" title="Published" class="dropdown-item">
+                                                Published
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_shopify_product_not_published_ept)d"
+                                                    type="action" title="UnPublished" class="dropdown-item">
+                                                UnPublished
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div
+                                            class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_view">
+                                        <div role="menuitem" class="o_kanban_card_manage_title">
+                                            <span>Sales</span>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_shopify_instance_sale_quotation)d"
+                                                    type="action" title="Quotations" class="dropdown-item">
+                                                Quotations
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_shopify_instance_sales_order_only)d"
+                                                    type="action" title="Sale Orders" class="dropdown-item">
+                                                Sale Orders
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_shopify_instance_risky_quotation)d"
+                                                    type="action" title="Risky Quotations" class="dropdown-item">
+                                                Risky Quotations
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div
+                                            class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_new">
+                                        <div role="menuitem" class="o_kanban_card_manage_title">
+                                            <span>Delivery</span>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a name="%(shopify_ept.action_picking_view_confirm_ept)d"
+                                               type="action" title="Waiting Availability" class="dropdown-item">
+                                                Waiting Availability
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_picking_view_partially_available_ept)d"
+                                                    type="action" title="Partially Available" class="dropdown-item">
+                                                Partially Available
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a name="%(shopify_ept.action_picking_view_assigned_ept)d"
+                                               type="action" title="Ready to Transfer" class="dropdown-item">
+                                                Ready to Transfer
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a name="%(shopify_ept.action_picking_view_done_ept)d"
+                                               type="action" title="Transferred" class="dropdown-item">
+                                                Transferred
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div
+                                            class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_view">
+                                        <div role="menuitem" class="o_kanban_card_manage_title">
+                                            <span>Invoices</span>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_invoice_shopify_invoices_open)d"
+                                                    type="action" title="Open" class="dropdown-item">
+                                                Open
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_invoice_shopify_invoices_paid)d"
+                                                    type="action" title="Paid" class="dropdown-item">
+                                                Paid
+                                            </a>
+                                        </div>
+                                        <div role="menuitem">
+                                            <a
+                                                    name="%(shopify_ept.action_invoice_shopify_invoices_refund)d"
+                                                    type="action" title="Refunds" class="dropdown-item">
+                                                Refunds
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                                    <ul class="oe_kanban_colorpicker" data-field="color"/>
+
+                        </t>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="#{kanban_color(record.color.raw_value)} record_dashboard_ept">
+                            <div class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary">
+                                        <t t-esc="record.name.value"/>
+                                    </div>
+<!--                                    <div class="o_kanban_manage_button_section">-->
+<!--                                        <a class="o_kanban_manage_toggle_button" href="#">-->
+<!--                                            <i class="fa fa-ellipsis-v" aria-label="Selection"-->
+<!--                                               role="img" title="Selection"/>-->
+<!--                                               role="img" title="Selection"/>-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                            <div>
+                                <field name="shopify_order_data"
+                                       t-att-graph_type="line" widget="dashboard_graph"/>
+<!--                                                                                           graph_type="line" widget="dashboard_graph_ept"/>-->
+
+                            </div>
+
+<!--                            <div-->
+<!--                                    class="container o_kanban_card_manage_pane dropdown-menu"-->
+<!--                                    role="menu">-->
+<!--&lt;!&ndash;                                <div class="row">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div&ndash;&gt;-->
+<!--&lt;!&ndash;                                            class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_view">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem" class="o_kanban_card_manage_title">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <span>Products</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_shopify_product_exported_ept)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Exported">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Exported&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_shopify_product_not_exported_ept)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Ready to Export">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Ready to Export&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_shopify_product_published_ept)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Published">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Published&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_shopify_product_not_published_ept)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="UnPublished">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                UnPublished&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div&ndash;&gt;-->
+<!--&lt;!&ndash;                                            class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_view">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem" class="o_kanban_card_manage_title">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <span>Sales</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_shopify_instance_sale_quotation)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Quotations">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Quotations&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_shopify_instance_sales_order_only)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Sale Orders">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Sale Orders&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_shopify_instance_risky_quotation)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Risky Quotations">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Risky Quotations&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div&ndash;&gt;-->
+<!--&lt;!&ndash;                                            class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_new">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem" class="o_kanban_card_manage_title">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <span>Delivery</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a name="%(shopify_ept.action_picking_view_confirm_ept)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               type="action" title="Waiting Availability">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Waiting Availability&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_picking_view_partially_available_ept)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Partially Available">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Partially Available&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a name="%(shopify_ept.action_picking_view_assigned_ept)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               type="action" title="Ready to Transfer">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Ready to Transfer&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a name="%(shopify_ept.action_picking_view_done_ept)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                               type="action" title="Transferred">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Transferred&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div&ndash;&gt;-->
+<!--&lt;!&ndash;                                            class="col-xs-3 o_kanban_card_manage_section o_kanban_manage_view">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem" class="o_kanban_card_manage_title">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <span>Invoices</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_invoice_shopify_invoices_open)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Open">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Open&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_invoice_shopify_invoices_paid)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Paid">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Paid&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div role="menuitem">&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <a&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    name="%(shopify_ept.action_invoice_shopify_invoices_refund)d"&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    type="action" title="Refunds">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                Refunds&ndash;&gt;-->
+<!--&lt;!&ndash;                                            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--                                <div t-if="widget.editable"-->
+<!--                                     class="o_kanban_card_manage_settings row">-->
+<!--                                    <div class="col-xs-8">-->
+<!--                                        <ul class="oe_kanban_colorpicker" data-field="color"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="shopify_kanban_action_ept"
+            model="ir.actions.act_window">
+        <field name="name">Shopify Dashboard</field>
+        <field name="res_model">shopify.instance.ept</field>
+        <field name="view_mode">kanban</field>
+        <field name="domain">[('active','=', True)]</field>
+        <field name="view_id" ref="shopify_instance_kanban_view_ept"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                There is no any Shopify Instance configured yet.
+            </p>
+            <p>
+                To add your first Shopify Instance, go to Configuration menu and
+                then open Settings, you can create new Instance from there. At there
+                you can define one or more Shopify Instances and configure extended
+                options per Instance test.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="shopify_main_menu_shopify_dashboard"
+              name="Dashboard" parent="shopify_ept.shopify_instance_menu_item"
+              action="shopify_kanban_action_ept" sequence="1"/>
+
+</odoo>
