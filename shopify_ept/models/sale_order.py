@@ -770,11 +770,11 @@ class SaleOrder(models.Model):
             if instance.apply_tax_in_order == "odoo_tax" and is_discount:
                 order_line_vals["tax_id"] = previous_line.tax_id
 
-        shopify_analytic_tag_ids = instance.shopify_analytic_tag_ids.ids
+        # shopify_analytic_tag_ids = instance.shopify_analytic_tag_ids.ids
         order_line_vals.update({
             "shopify_line_id": line.get("id"),
             "is_delivery": is_shipping,
-            "analytic_tag_ids": [(6, 0, shopify_analytic_tag_ids)],
+            # "analytic_tag_ids": [(6, 0, shopify_analytic_tag_ids)],
         })
         order_line = sale_order_line_obj.create(order_line_vals)
         order_line.with_context(round=False)._compute_amount()
