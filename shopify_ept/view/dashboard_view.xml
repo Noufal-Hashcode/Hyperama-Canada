@@ -160,11 +160,12 @@
                                 </div>
                             </div>
                             <div>
-                                <field name="shopify_order_data"
-                                       t-att-graph_type="line" widget="dashboard_graph"/>
+<!--                                <field name="shopify_order_data"-->
+<!--                                       t-att-graph_type="line" widget="dashboard_graph"/>-->
 <!--                                                                                           graph_type="line" widget="dashboard_graph_ept"/>-->
 
                             </div>
+
 
 <!--                            <div-->
 <!--                                    class="container o_kanban_card_manage_pane dropdown-menu"-->
