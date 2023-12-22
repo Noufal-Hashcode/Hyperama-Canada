@@ -1,0 +1,21 @@
+{
+    'name': 'Import Product Images',
+    'version': '17.0.1.0',
+    'author': 'Hash Code IT Solutions',
+    'summary': 'Import Product Images',
+    'description': """This module for Import Products From Local Storage And URLs.""",
+    'category': 'Products/ImportImages',
+    'website': 'info@hashcodeit.com',
+    'license': 'AGPL-3',
+    'depends': ['product'],
+    'data': [
+        'security/ir.model.access.csv',
+        'wizard/product_image_import_view.xml',
+    ],
+    'assets': {},
+    'qweb': [],
+    "images": ["static/description/icon.png"],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}
