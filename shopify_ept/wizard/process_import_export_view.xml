@@ -609,7 +609,7 @@
         <field name="arch" type="xml">
             <form string="Export Stock">
                 <sheet>
-                    <group name='shopify_export_stock_manual'>
+                    <div name='shopify_export_stock_manual'>
                         <div style="color:#000000">
                             <p class="alert alert-warning" role="alert">
                                 <u>
@@ -630,7 +630,7 @@
                                 </b>
                             </p>
                         </div>
-                    </group>
+                    </div>
                     <footer>
                         <button string="Export Stock Manually"
                                 class="oe_highlight" type="object"
