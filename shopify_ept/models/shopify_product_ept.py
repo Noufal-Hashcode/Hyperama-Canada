@@ -366,6 +366,7 @@ class ShopifyProductProductEpt(models.Model):
             @author: Haresh Mori @Emipro Technologies Pvt. Ltd on date 21 October 2020 .
             Task_id: 167537
         """
+        new_product=None
         if not template.shopify_tmpl_id:
             return False
         try:
