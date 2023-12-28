@@ -74,7 +74,9 @@
     'currency': 'EUR',
     'assets': {
         'web.assets_backend': [
-            'shopify_ept/static/src/js/shopify_button_collapse.js'
+            # 'shopify_ept/static/src/js/shopify_button_collapse.js',
+
+
         ],
     },
 }

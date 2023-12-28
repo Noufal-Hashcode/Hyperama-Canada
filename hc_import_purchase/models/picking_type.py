@@ -37,6 +37,8 @@ class StockPicking(models.Model):
                 if main_transfer_picking_id:
                     rec.main_transfer_picking_id = main_transfer_picking_id.id
                     rec.main_transfer_created = True
+                    main_transfer_picking_id._onchange_picking_type()
+                    main_transfer_picking_id._onchange_locations()
                     main_transfer_picking_id.action_confirm()
                     main_transfer_picking_id.action_assign()
                     main_transfer_picking_id.button_validate()

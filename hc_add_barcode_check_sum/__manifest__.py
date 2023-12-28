@@ -3,7 +3,7 @@
     'author': "nbl",
     'maintainer': 'nbl',
     'website': 'https://hashcodeit.com/',
-    'version': '17.0.1.1',
+    'version': '17.0.1.2',
     'support': 'info@hashcodeit.com',
     'category': '',
     'summary': 'Add EAN13 Barcode Check Sum',

@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-<!--    <t t-name="Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">-->
-    <t t-name="Orderline" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
-                <xpath expr="//Orderline" position="replace">
-<!--                </xpath>-->
-
-
-<!--        <xpath expr="//li" position="replace">-->
-
+<!--    <t t-name="Orderline" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">-->
+<!--        <xpath expr="//Orderline" position="after">-->
+    <t t-name="Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+                <xpath expr="//li[hasclass('orderline')]" position="replace">
             <t t-if="!line.is_material">
                 <li class="orderline p-2 lh-sm cursor-pointer"
                     t-attf-class="{{ line.comboParent ? 'border-start border-3 ms-4' : '' }}"
                     t-att-class="props.class">
-            <div class="d-flex justify-content-between">
-                <div class="product-name d-inline-block flex-grow-1 fw-bolder pe-1 text-truncate">
+                <div class="d-flex justify-content-between">
+                    <div class="product-name d-inline-block flex-grow-1 fw-bolder pe-1 text-truncate">
                     <span class="text-wrap" t-esc="line.productName"/>
-                    <t t-slot="product-name"/>
+                        <t t-slot="product-name"/>
             </div>
-                <div t-esc="line.price" class="price fw-bolder"/>
-            </div>
+                    <div t-esc="line.price" class="price fw-bolder"/>
+                </div>
                     <ul class="info-list ms-2">
                 <li class="price-per-unit">
                     <em t-esc="line.qty" class="qty fst-normal fw-bolder me-1"/>
@@ -46,8 +42,6 @@
             </ul>
         </li>
             </t>
-
-
 
         </xpath>
     </t>
