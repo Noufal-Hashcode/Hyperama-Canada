@@ -24,9 +24,10 @@
         'point_of_sale._assets_pos': [
             'hc_pos_customisation/static/src/xml/pos.xml',
             'hc_pos_customisation/static/src/app/js/models.js',
-            # 'hc_pos_customisation/static/src/app/js/OrderLine.js',
 
         ],
+
+
 
     },
     'installable': True,
