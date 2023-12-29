@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="stock_picking_type_inherited_type" model="ir.ui.view">
+        <field name="name">stock.picking.type.inherited.type</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='warehouse_id']" position="after">
+                <field name="is_import_receipt"/>
+                <field name="is_transfer_to_main"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="stock_picking_form_inherited_type" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherited.type</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_confirm']" position="before">
+                <field name="is_import_receipt" invisible="1"/>
+                <field name="main_transfer_created" invisible="1"/>
+                <button name="action_transfer_to_main_stock" invisible="state != 'done' or not is_import_receipt or main_transfer_created"
+                        string="Transfer To Main" type="object"
+                        class="oe_highlight" groups="base.group_user"/>
+            </xpath>
+            <xpath expr="//sheet/div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_see_main_transfer" type="object"
+                        class="oe_stat_button" string="Main Transfer"
+                        invisible="not is_import_receipt">
+<!--                    <field string="Returns" name="return_count" widget="statinfo"/>-->
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+

@@ -5,17 +5,17 @@
 
 {
     'name': 'Custom Product Labels',
-    'version': '17.0.1.1.0',
+    'version': '17.0.1.1.3',
     'category': 'Extra Tools',
     'author': 'Garazd Creation',
-    'website': 'https://garazd.biz/en/shop/category/odoo-product-labels-15',
+    'website': '',
     'license': 'LGPL-3',
     'summary': 'Print custom product labels with barcode | Barcode Product Label',
     'images': ['static/description/banner.png', 'static/description/icon.png'],
-    'live_test_url': 'https://garazd.biz/r/r2G',
     'depends': [
         'product',
     ],
+    'module_type': 'official',
     'data': [
         'security/ir.model.access.csv',
         'report/product_label_reports.xml',
@@ -26,7 +26,7 @@
     'demo': [
         'demo/product_demo.xml',
     ],
-    'support': 'support@garazd.biz',
+    'support': '',
     'application': True,
     'installable': True,
     'auto_install': False,
