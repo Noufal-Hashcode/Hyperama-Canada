@@ -5,7 +5,7 @@
 
 {
     'name': 'Custom Product Labels',
-    'version': '17.0.1.1.1',
+    'version': '17.0.1.1.3',
     'category': 'Extra Tools',
     'author': 'Garazd Creation',
     'website': '',
@@ -15,6 +15,7 @@
     'depends': [
         'product',
     ],
+    'module_type': 'official',
     'data': [
         'security/ir.model.access.csv',
         'report/product_label_reports.xml',
