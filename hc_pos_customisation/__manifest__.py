@@ -5,7 +5,7 @@
 {
     'name': 'POS-Custom Receipt',
     "author": "MKR",
-    'version': '1.1',
+    'version': '1.2',
     'category': 'pos',
     'sequence': 6,
     'summary': 'hide product in receipt based on category',
