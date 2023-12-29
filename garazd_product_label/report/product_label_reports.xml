@@ -19,10 +19,10 @@
     </record>
 
     <record id="paperformat_label_50x38" model="report.paperformat">
-        <field name="name">Label 50x38 mm</field>
+        <field name="name">Label 89x36 mm</field>
         <field name="format">custom</field>
-        <field name="page_height">38</field>
-        <field name="page_width">50</field>
+        <field name="page_height">36</field>
+        <field name="page_width">89</field>
         <field name="orientation">Portrait</field>
         <field name="margin_top">1</field>
         <field name="margin_bottom">0</field>
@@ -31,7 +31,7 @@
         <field name="header_line" eval="False"/>
         <field name="header_spacing">0</field>
         <field name="disable_shrinking" eval="True"/>
-        <field name="dpi">96</field>
+        <field name="dpi">90</field>
         <field name="default" eval="False"/>
     </record>
 
@@ -46,7 +46,7 @@
     </record>
 
     <record id="action_report_product_label_50x38" model="ir.actions.report">
-        <field name="name">Product Labels 50x38mm</field>
+        <field name="name">Product Labels 89x36mm</field>
         <field name="model">print.product.label.line</field>
         <field name="report_type">qweb-pdf</field>
         <field name="paperformat_id" ref="paperformat_label_50x38"/>
