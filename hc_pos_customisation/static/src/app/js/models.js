@@ -16,6 +16,9 @@ patch(Orderline.prototype, {
         	...super.getDisplayData(),
 
             is_material: this.get_product().is_package,
+            barcode: this.get_product().barcode,
+            default_code: this.get_product().default_code,
+
 
         };
     }
