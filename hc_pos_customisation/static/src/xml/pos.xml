@@ -1,73 +1,202 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-<!--    <t t-name="Orderline" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">-->
-<!--        <xpath expr="//Orderline" position="after">-->
+
     <t t-name="Orderline" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
-         <xpath expr="//div[hasclass('pos-receipt-taxes')]" position="replace">
-             <div t-if="props.data.tax_details.length > 0" class="pos-receipt-taxes">
-                <span />
+
+                <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
+
+        <div class="pos-receipt">
+            <ReceiptHeader data="props.data.headerData"/>
+            <OrderWidget lines="props.data.orderlines" t-slot-scope="scope">
+                                    <t t-set="line" t-value="scope.line"/>
+                <t t-if="!line.is_material">
+
+                <Orderline line="omit(scope.line, 'customerNote')">
+
+                </Orderline>
+                        </t>
+            </OrderWidget>
+            <div class="pos-receipt-right-align">--------</div>
+            <br/>
+            <div class="pos-receipt-amount">
+                SUB TOTAL
+                <span t-esc="props.formatCurrency(props.data.total_without_tax)" class="pos-receipt-right-align"/>
+            </div>
+            <t t-if="props.data.rounding_applied">
+                <div class="pos-receipt-amount">
+                  Rounding
+                <span t-esc='props.formatCurrency(props.data.rounding_applied)' class="pos-receipt-right-align"/>
+                </div>
+                <div class="pos-receipt-amount">
+                  To Pay
+                 <span t-esc='props.formatCurrency(props.data.amount_total + props.data.rounding_applied)'
+                       class="pos-receipt-right-align"/>
+              </div>
+            </t>
+            <br/>
+            <br/>
+
+            <!-- Payment Lines -->
+
+            <div class="paymentlines" t-foreach="props.data.paymentlines" t-as="line" t-key="line_index">
+                <t t-esc="line.name"/>
+                <span t-esc="props.formatCurrency(line.amount, false)" class="pos-receipt-right-align"/>
+            </div>
+
+            <div class="pos-receipt-amount receipt-change mt-2">
+                CHANGE
+                <span t-esc="props.formatCurrency(props.data.change)" class="pos-receipt-right-align"/>
+            </div>
+
+            <!-- Extra Payment Info -->
+
+            <t t-if="props.data.total_discount">
+                <div>
+                    Discounts
+                    <span t-esc="props.formatCurrency(props.data.total_discount)" class="pos-receipt-right-align"/>
+                </div>
+            </t>
+            <div t-if="props.data.tax_details.length > 0" class="pos-receipt-taxes">
+                <span/>
+
                 <span>HST%</span>
                 <span>HST</span>
                 <span>ExHST</span>
                 <span>Total</span>
                 <t t-foreach="props.data.tax_details" t-as="tax" t-key="tax.tax.id">
                     <span t-esc="tax.tax.letter || ''"/>
-                    <span><t t-esc="tax.tax.amount"/> %</span>
-                    <span t-esc="props.formatCurrency(tax.amount, false)" />
-                    <span t-esc="props.formatCurrency(tax.base, false)" />
-                    <span t-esc="props.formatCurrency(tax.amount + tax.base, false)" />
+                    <span><t t-esc="tax.tax.amount"/>
+                        %</span>
+                    <span t-esc="props.formatCurrency(tax.amount, false)"/>
+                    <span t-esc="props.formatCurrency(tax.base, false)"/>
+                    <span t-esc="props.formatCurrency(tax.amount + tax.base, false)"/>
                 </t>
                 <t t-if="props.data.tax_details.length > 1">
-                    <span />
-                    <span />
-                    <span t-esc="props.formatCurrency(props.data.amount_tax, false)" />
-                    <span t-esc="props.formatCurrency(props.data.total_without_tax, false)" />
-                    <span t-esc="props.formatCurrency(props.data.amount_total, false)" />
+                    <span/>
+                    <span/>
+                    <span t-esc="props.formatCurrency(props.data.amount_tax, false)"/>
+                    <span t-esc="props.formatCurrency(props.data.total_without_tax, false)"/>
+                    <span t-esc="props.formatCurrency(props.data.amount_total, false)"/>
                 </t>
             </div>
-         </xpath>
-    </t>
-    <t t-name="Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
-                <xpath expr="//li[hasclass('orderline')]" position="replace">
-            <t t-if="!line.is_material">
-                <li class="orderline p-2 lh-sm cursor-pointer"
-                    t-attf-class="{{ line.comboParent ? 'border-start border-3 ms-4' : '' }}"
-                    t-att-class="props.class">
-                <div class="d-flex justify-content-between">
-                    <div class="product-name d-inline-block flex-grow-1 fw-bolder pe-1 text-truncate">
-                    <span class="text-wrap" t-esc="line.productName"/>
-                        <t t-slot="product-name"/>
-            </div>
-                    <div t-esc="line.price" class="price fw-bolder"/>
+
+            <div class="before-footer"/>
+
+            <div t-if="props.data.pos_qr_code">
+                <br/>
+                <br/>
+                <div class="pos-receipt-order-data mb-2">
+                    Scan me to request an invoice for your purchase.
                 </div>
-                    <ul class="info-list ms-2">
-                <li class="price-per-unit">
-                    <em t-esc="line.qty" class="qty fst-normal fw-bolder me-1"/>
-                    <t t-if="line.unit" t-esc="line.unit"/>
-                    x
-                    <s t-esc="line.oldUnitPrice" t-if="line.oldUnitPrice"/>
-                    <t t-esc="line.unitPrice"/>
-                    <span t-if="line.unit"> / <t t-esc="line.unit"/></span>
-                </li>
-                        <li t-if="line.discount and line.discount !== '0'">
-                    With a <em><t t-esc="line.discount" />% </em>
-                            discount
-                </li>
-                        <t t-slot="default"/>
-                        <li t-if="line.customerNote"
-                            class="customer-note w-100 p-2 my-1 rounded text-break text-bg-warning text-warning bg-opacity-25">
-                    <i class="fa fa-sticky-note me-1" role="img" aria-label="Customer Note" title="Customer Note"/>
-                            <t t-esc="line.customerNote"/>
-                </li>
-                        <li t-if="line.internalNote"
-                            class="internal-note w-100 p-2 my-1 rounded text-bg-info text-info bg-opacity-25 text-break">
-                    <i class="fa fa-tag me-1" role="img" aria-label="Note" title="Note"/>
-                            <t t-esc="line.internalNote"/>
-                </li>
-            </ul>
-        </li>
+                <img id="posqrcode" t-att-src="props.data.pos_qr_code" class="pos-receipt-logo"/>
+            </div>
+
+            <div t-if="props.data.ticket_code">
+                <br/>
+                <br/>
+                <div class="pos-receipt-order-data">
+                    You can go to <t t-out="props.data.base_url"/>/pos/ticket and use the code below to request an
+                    invoice online
+                </div>
+                <div class="pos-receipt-order-data">
+                    Unique Code: <t t-out="props.data.ticket_code"/>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div t-if="props.data.footer" class="pos-receipt-center-align" style="white-space:pre-line">
+               <br/>
+                <t t-esc="props.data.footer"/>
+                <br/>
+                <br/>
+            </div>
+
+            <div class="after-footer">
+                <t t-foreach="props.data.paymentlines" t-as="line" t-key="line_index">
+                    <t t-if="line.ticket">
+                        <br/>
+                        <div class="pos-payment-terminal-receipt">
+                            <pre t-esc="line.ticket"/>
+                        </div>
+                    </t>
+                </t>
+            </div>
+
+            <br/>
+            <t t-if="props.shippingDate">
+                <div class="pos-receipt-order-data">
+                    Expected delivery:
+                    <div><t t-esc="props.shippingDate" /></div>
+                </div>
             </t>
 
+            <br/>
+            <div class="pos-receipt-order-data">
+                <div t-esc="props.data.name"/>
+                <div t-esc="props.data.date"/>
+            </div>
+        </div>
+
         </xpath>
+        <!--        <xpath expr="//li[hasclass('pos-receipt-amount')]" position="replace">-->
+        <!--              <div class="pos-receipt-amount">-->
+        <!--                TOTAL-->
+        <!--                <span t-esc="props.formatCurrency(props.data.amount_total)" class="pos-receipt-right-align"/>-->
+        <!--            </div>-->
+        <!--          </xpath>-->
     </t>
+
+    <t t-name="Orderlines" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension" owl="1">
+
+                <xpath expr="//li[hasclass('orderline')]" position="replace">
+                                    <li class="orderline p-2 lh-sm cursor-pointer"
+                                        t-attf-class="{{ line.comboParent ? 'border-start border-3 ms-4' : '' }}"
+                                        t-att-class="props.class">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="product-name d-inline-block flex-grow-1 fw-bolder pe-1 text-truncate">
+                                        <span class="text-wrap" t-esc="line.productName"/>
+                                            <t t-slot="product-name"/>
+                                </div>
+                                        <div t-esc="line.price" class="price fw-bolder"/>
+                                    </div>
+                                        <ul class="info-list ms-2">
+                                    <li class="price-per-unit">
+                                        <em t-esc="line.qty" class="qty fst-normal fw-bolder me-1"/>
+                                        <t t-if="line.unit" t-esc="line.unit"/>
+                                        x
+                                        <s t-esc="line.oldUnitPrice" t-if="line.oldUnitPrice"/>
+                                        <t t-esc="line.unitPrice"/>
+                                        <span t-if="line.unit"> / <t t-esc="line.unit"/></span>
+                                    </li>
+                                            <li t-if="line.discount and line.discount !== '0'">
+                                        With a <em><t t-esc="line.discount" />% </em>
+                                                discount
+                                    </li>
+                                            <t t-slot="default"/>
+                                            <li t-if="line.customerNote"
+                                                class="customer-note w-100 p-2 my-1 rounded text-break text-bg-warning text-warning bg-opacity-25">
+                                        <i class="fa fa-sticky-note me-1" role="img" aria-label="Customer Note"
+                                           title="Customer Note"/>
+                                                <t t-esc="line.customerNote"/>
+                                    </li>
+                                            <li t-if="line.internalNote"
+                                                class="internal-note w-100 p-2 my-1 rounded text-bg-info text-info bg-opacity-25 text-break">
+                                        <i class="fa fa-tag me-1" role="img" aria-label="Note" title="Note"/>
+                                                <t t-esc="line.internalNote"/>
+                                    </li>
+                                </ul>
+                                        <ul class="info-list ms-2">
+                    <!--                        <li class="price-per-unit">-->
+
+                                            <!--         <span t-if="line.unit"> SKU: <t t-esc="line.default_code"/></span>-->
+                                            <!--                        </li>-->
+
+                                            <li class="price-per-unit">
+                                                <span t-if="line.barcode"> Barcode: <t t-esc="line.barcode"/></span>
+
+                    </li>
+                                                            </ul>
+                            </li>
+                </xpath>
+        </t>
 </templates>
