@@ -1,7 +1,7 @@
 {
     'name': 'POS Settings Menu',
     "author": "",
-    'version': '17.0.0.0',
+    'version': '17.0.0.1',
     'category': 'point_of_sale',
     'sequence': 6,
     'summary': 'POS Settings Menu',
