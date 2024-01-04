@@ -3,9 +3,9 @@
 
     <menuitem id="point_of_sale.menu_pos_global_settings"
               name="Settings"
-              parent="menu_point_config_product"
+              parent="point_of_sale.menu_point_config_product"
               sequence="0"
-              action="action_pos_configuration"
+              action="point_of_sale.action_pos_configuration"
               groups="point_of_sale.group_pos_manager"/>
 </odoo>
 
