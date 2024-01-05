@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <menuitem id="point_of_sale.menu_pos_global_settings"
+              name="Settings"
+              parent="point_of_sale.menu_point_config_product"
+              sequence="0"
+              action="point_of_sale.action_pos_configuration"
+              groups="point_of_sale.group_pos_manager"/>
+</odoo>
+
