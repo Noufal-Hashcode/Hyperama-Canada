@@ -467,7 +467,7 @@ class ResConfigSettings(models.TransientModel):
                                          self.shopify_credit_tax_account_id.id or False,
                 'import_order_after_date': self.shopify_import_order_after_date,
                 'shopify_analytic_account_id': self.shopify_analytic_account_id.id or False,
-                'shopify_analytic_tag_ids': self.shopify_analytic_tag_ids.ids or False
+                # 'shopify_analytic_tag_ids': self.shopify_analytic_tag_ids.ids or False
             }
 
             instance.write(basic_configuration_dict)
