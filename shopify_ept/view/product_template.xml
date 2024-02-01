@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_product_form_inherit_for_shopify" model="ir.ui.view">
+        <field name="name">product.category.stock.purchase.type.form.inherited</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='categ_id']" position="after">
+                <field name="export_to_shopify"/>
+                <field name="shopify_instance_id" invisible="export_to_shopify != True"/>
+
+            </xpath>
+        </field>
+    </record>
+<!--     <record id="product_product_for_view_inherited_shopify" model="ir.ui.view">-->
+<!--            <field name="name">product_product_tree_view_inherit_family_code</field>-->
+<!--            <field name="model">product.product</field>-->
+<!--            <field name="inherit_id" ref="product.product_normal_form_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--               <xpath expr="//field[@name='categ_id']" position="after">-->
+<!--                <field name="export_to_shopify"/>-->
+<!--                <field name="shopify_instance_id" invisible="export_to_shopify != True"/>-->
+
+<!--            </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+</odoo>

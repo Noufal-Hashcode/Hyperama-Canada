@@ -25,7 +25,7 @@
                      invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)">
                     Order Information
                 </div>
-                <group invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)">
+                <block invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)">
                     <div class="o_setting_left_pane" style="width: 250%;">
                         <div class="row mt16 o_settings_container o_onboard_padding">
                             <div class="col-12 o_setting_box o_onboard_setting_box">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="o_setting_right_pane" style="width: 250%;">
+                    <div class="o_setting_left_pane" style="width: 250%;">
                         <div class="row mt16 o_settings_container o_onboard_padding">
                             <div class="col-12 o_setting_box o_onboard_setting_box">
                                 <div class="o_setting_left_pane">
@@ -135,7 +135,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="o_setting_left_pane" style="width: 250%;">
+                    <div class="" style="width: 250%;">
                         <div class="row mt16 o_settings_container o_onboard_padding">
                             <div class="col-12 o_setting_box o_onboard_setting_box">
                                 <div class="o_setting_left_pane">
@@ -174,13 +174,13 @@
                             </div>
                         </div>
                     </div>
-                </group>
+                </block>
                 <div class="o_horizontal_separator o_onboard_header font-weight-bold"
                      invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)">
                     Stock Information
                 </div>
-                <group invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)">
-                    <div class="o_setting_left_pane" style="width: 250%;">
+                <block invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)">
+                    <div class="" style="width: 250%;">
                         <div class="row mt16 o_settings_container o_onboard_padding">
                             <div class="col-12 o_setting_box o_onboard_setting_box">
                                 <div class="o_setting_left_pane">
@@ -216,12 +216,12 @@
                             </div>
                         </div>
                     </div>
-                </group>
+                </block>
                 <div class="o_horizontal_separator o_onboard_header font-weight-bold"
                      invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)">
                     Payout Report Information
                 </div>
-                <group invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)">
+                <block invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)">
                     <div class="o_setting_left_pane" style="width: 250%;">
                         <div class="row mt16 o_settings_container o_onboard_padding">
                             <div class="col-12 o_setting_box o_onboard_setting_box">
@@ -257,7 +257,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="o_setting_right_pane" style="width: 250%;">
+                    <div class="o_setting_left_pane" style="width: 250%;">
                         <div class="row mt16 o_settings_container o_onboard_padding">
                             <div class="col-12 o_setting_box o_onboard_setting_box">
                                 <div class="o_setting_left_pane">
@@ -276,7 +276,7 @@
                             </div>
                         </div>
                     </div>
-                </group>
+                </block>
                 <footer>
                     <button string="Save" class="oe_highlight o_onboard_button" type="object" name="save"
                             invisible="context.get('is_calling_from_onboarding_panel', False) and not context.get('is_instance_exists', False)"/>
