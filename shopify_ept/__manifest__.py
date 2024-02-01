@@ -58,6 +58,8 @@
         'view/shopify_payout_report_ept.xml',
         'wizard/instance_configuration_wizard.xml',
         'view/delivery_carrier_view.xml',
+        'view/product_template.xml',
+
     ],
     'demo_xml': [],
     # cloc settings
