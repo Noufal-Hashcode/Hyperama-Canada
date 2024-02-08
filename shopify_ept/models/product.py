@@ -14,9 +14,14 @@ class ProductTemplate(models.Model):
 
     shopify_instance_id = fields.Many2one("shopify.instance.ept")
     export_to_shopify = fields.Boolean(string='Export to Shopify', default=False)
+
+    # server action
     def action_shopify(self):
         for rec in self:
-            rec.export_to_shopify=True
+            shopify_product =self.env['shopify.product.template.ept'].search([('product_tmpl_id','=',rec.id)])
+            if shopify_product:
+                rec.export_to_shopify=True
+                rec.shopify_instance_id =shopify_product.shopify_instance_id
     def manual_update_product_to_shopify(self):
         """ This method is used to call child method for update products values from shopify layer products to Shopify
             store. It calls from the Shopify layer product screen.
