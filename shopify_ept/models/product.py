@@ -33,6 +33,10 @@ class ProductTemplate(models.Model):
         shopify_product_template_obj = self.env['shopify.product.template.ept']
         shopify_product_obj = self.env['shopify.product.product.ept']
         instance_obj = self.env['shopify.instance.ept']
+        product_obj = self.env['product.product'].search([('product_tmpl_id','=',self.id)])
+        var = shopify_product_obj.search([('product_id','=',product_obj.id)])
+        var.default_code=self.default_code
+
 
         start = time.time()
         shopify_products = self._context.get('active_ids', [])
@@ -54,6 +58,7 @@ class ProductTemplate(models.Model):
                                                            True)
         end = time.time()
         _logger.info("Update Processed %s Products in %s seconds.", str(len(template)), str(end - start))
+
         return True
 
     def export_direct_in_shopify(self, product_templates):
@@ -282,11 +287,14 @@ class ProductTemplate(models.Model):
                 raise UserError(_("It seems like selected products are not Storable products."))
             shopify_products = self.env["shopify.product.template.ept"].search(
                 [('product_tmpl_id', '=', self.id)])
+            # self.manual_export_product_to_shopify(self)
+
             if not shopify_products:
                 self.export_direct_in_shopify(self)
                 self.manual_export_product_to_shopify(self)
             else:
                 self.manual_update_product_to_shopify()
+
         return res
 
 
@@ -316,9 +324,14 @@ class ProductProduct(models.Model):
                 raise UserError(_("It seems like selected products are not Storable products."))
             shopify_products = self.env["shopify.product.template.ept"].search(
                 [('product_tmpl_id', '=', self.product_tmpl_id.id)])
+
             if not shopify_products:
                 self.export_direct_in_shopify(self.product_tmpl_id)
                 self.manual_export_product_to_shopify(self.product_tmpl_id)
+
+            else:
+                self.manual_update_product_to_shopify()
+
         # return res
         return res
 
@@ -518,4 +531,40 @@ class ProductProduct(models.Model):
         end = time.time()
         _logger.info("Export Processed %s Products in %s seconds.", str(len(templates)), str(end - start))
         return True
+
+    # def manual_update_product_to_shopify(self):
+    #     """ This method is used to call child method for update products values from shopify layer products to Shopify
+    #         store. It calls from the Shopify layer product screen.
+    #     """
+    #     # if not self.shopify_is_update_basic_detail and not self.shopify_is_publish and not self.shopify_is_set_price \
+    #     #         and not self.shopify_is_set_image:
+    #     #     raise UserError("Please Select Any Option To Update Product.")
+    #
+    #     shopify_product_template_obj = self.env['shopify.product.template.ept']
+    #     shopify_product_obj = self.env['shopify.product.product.ept']
+    #     instance_obj = self.env['shopify.instance.ept']
+    #
+    #     start = time.time()
+    #     # shopify_products = self._context.get('active_ids', [])
+    #     template = shopify_product_template_obj.search([('product_tmpl_id','=',self.product_tmpl_id)])
+    #
+    #     # template = shopify_product_template_obj.browse(shopify_products)
+    #     templates = template.filtered(lambda x: x.exported_in_shopify)
+    #     # if templates and len(templates) > 80:
+    #     #     raise UserError(_("Error:\n- System will not update more then 80 Products at a "
+    #     #                       "time.\n- Please select only 80 product for export."))
+    #     shopify_instances = instance_obj.search([])
+    #     for instance in shopify_instances:
+    #         shopify_templates = templates.filtered(lambda product: product.shopify_instance_id == instance)
+    #         if shopify_templates:
+    #             shopify_product_obj.update_products_in_shopify(instance, shopify_templates,
+    #                                                           True,
+    #                                                            True,
+    #                                                            True,
+    #                                                            True,
+    #                                                            )
+    #     end = time.time()
+    #     _logger.info("Update Processed %s Products in %s seconds.", str(len(template)), str(end - start))
+    #     return True
+
 
