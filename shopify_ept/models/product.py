@@ -36,6 +36,9 @@ class ProductTemplate(models.Model):
         product_obj = self.env['product.product'].search([('product_tmpl_id','=',self.id)])
         var = shopify_product_obj.search([('product_id','=',product_obj.id)])
         var.default_code=self.default_code
+        var.name=self.name
+        product_template_ept = shopify_product_template_obj.search([('product_tmpl_id','=',self.id)])
+        product_template_ept.name = self.name
 
 
         start = time.time()
