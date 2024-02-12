@@ -1,0 +1,12 @@
+<odoo noupdate="0">
+	<record forcecreate="True" id="cron_send_daily_sales" model="ir.cron">
+		<field name="name">Sent Daily Sales</field>
+		<field eval="True" name="active"/>
+		<field name="interval_number">10</field>
+		<field name="interval_type">minutes</field>
+		<field name="numbercall">-1</field>
+		<field name="model_id" ref="hc_daily_sales_report.model_product_division"/>
+		<field name="state">code</field>
+		<field name="code">model.send_email_with_attachment()</field>
+	</record>
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_product_division" model="ir.ui.view">
+        <field name="name">view.product_division</field>
+        <field name="model">product.division</field>
+        <field name="arch" type="xml">
+            <form string="Divisions" create="True">
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="view_product_division_tree" model="ir.ui.view">
+        <field name="name">view.product_division</field>
+        <field name="model">product.division</field>
+        <field name="arch" type="xml">
+            <tree editable="top" create="1" delete="1" multi_edit="1" open_form_view="True">
+                    <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record model='ir.actions.act_window' id='product_division_act'>
+        <field name="name">Product Division</field>
+        <field name="res_model">product.division</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_product_division_tree"/>
+    </record>
+
+    <menuitem name="Product Divisions"
+              id="product_divisions"
+              parent="point_of_sale.menu_point_config_product"
+              action="product_division_act"/>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="user_group_daily_sales_report" model="res.groups">
+            <field name="name">Send Daily Sales</field>
+        </record>
+
+    </data>
+</odoo>
