@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="retail_division" model="product.division">
+        <field name="name">Retail</field>
+    </record>
+    <record id="lekker_division" model="product.division">
+        <field name="name">Lekker</field>
+    </record>
+    <record id="diner_division" model="product.division">
+        <field name="name">Diner</field>
+    </record>
+</odoo>
