@@ -972,7 +972,7 @@ class SaleOrder(models.Model):
             shopify_line_ids = not self.is_service_tracking_updated and self.order_line.filtered(
                 lambda l: l.shopify_line_id and l.product_id.type == "service" and
                           not l.is_delivery).mapped("shopify_line_id") or []
-        moves = picking.move_lines
+        moves = picking.move_ids
         product_moves = moves.filtered(lambda x: x.sale_line_id.product_id.id == x.product_id.id and x.state == "done")
         if picking.mapped("package_ids").filtered(lambda l: l.tracking_no):
             tracking_numbers, line_items = self.prepare_tracking_numbers_and_lines_for_multi_tracking_order(
@@ -1453,8 +1453,8 @@ class SaleOrder(models.Model):
         skip_sms = {"skip_sms": True}
         for picking in pickings.filtered(lambda x: x.state not in ['cancel', 'done']):
             if picking.state != "assigned":
-                if picking.move_lines.move_orig_ids:
-                    completed = self.fulfilled_picking_for_shopify(picking.move_lines.move_orig_ids.picking_id)
+                if picking.move_ids.move_orig_ids:
+                    completed = self.fulfilled_picking_for_shopify(picking.move_ids.move_orig_ids.picking_id)
                     if not completed:
                         return False
                 picking.action_assign()
