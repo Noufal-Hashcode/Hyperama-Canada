@@ -13,6 +13,4 @@ class ProductDivision(models.Model):
         report_content = wizard.generate_daily_report()
         recipients = wizard.get_email_recipients()
         if report_content and recipients:
-            print("Sending report to:", recipients)
-            print("Report content:", report_content)
-            wizard.send_daily_report_email(report_content, 'firasafarhath8@gmail.com')
+            wizard.send_daily_report_email(report_content, recipients)

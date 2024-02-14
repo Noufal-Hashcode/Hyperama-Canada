@@ -74,24 +74,3 @@ class ReportsaleSummary(models.AbstractModel):
         return docargs
 
 
-    def send_email_with_attachment(self):
-        report_template_id = self.env.ref(
-            'hc_daily_sales_report.report_daily_sales').render_qweb_pdf(self.id)
-        data_record = base64.b64encode(report_template_id[0])
-        ir_values = {
-            'name': "Customer Report",
-            'type': 'binary',
-            'datas': data_record,
-            'store_fname': data_record,
-            'mimetype': 'application/x-pdf',
-        }
-        data_id = self.env['ir.attachment'].create(ir_values)
-        template = self.template_id
-        template.attachment_ids = [(6, 0, [data_id.id])]
-        email_values = {'email_to': self.partner_id.email,
-                        'email_from': self.env.user.email}
-        template.send_mail(self.id, email_values=email_values, force_send=True)
-        template.attachment_ids = [(3, data_id.id)]
-        return True
-
-
