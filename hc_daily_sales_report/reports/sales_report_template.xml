@@ -13,7 +13,7 @@
                         <div class="row">
                             <span style="font-size:16px;text-align:left;padding-left:15px;">
                                 Date:
-                                <!--                                <span t-esc="o.date"/>-->
+                                <span t-esc="date"/>
                             </span>
                         </div>
                         <table class="table table-bordered" id="table_sss">
