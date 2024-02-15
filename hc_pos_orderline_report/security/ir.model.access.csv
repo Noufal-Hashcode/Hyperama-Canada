@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_sale_report,access_product_sale_report,model_product_sale_report,base.group_user,1,1,1,1
+access_product_report_wiz,access_product_report_wiz,model_product_report_wiz,base.group_user,1,1,1,1
+
