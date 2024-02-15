@@ -20,7 +20,7 @@
                             <thead>
                                 <tr>
                                     <th>Division</th>
-                                    <th>Date</th>
+<!--                                    <th>Date</th>-->
                                     <t t-foreach="payment_method" t-as="method">
                                         <th>
                                             <span t-esc="method"/>
@@ -38,10 +38,10 @@
                                             <span t-esc="line['division_name']"/>
 
                                         </td>
-                                        <td>
-                                            <span t-esc="line['date']"/>
+<!--                                        <td>-->
+<!--                                            <span t-esc="line['date']"/>-->
 
-                                        </td>
+<!--                                        </td>-->
                                         <t t-foreach="payment_method" t-as="method">
                                             <td>
                                                 <span t-esc="line[method]"/>
