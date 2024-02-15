@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="hc_closing_date_alteration_filter">
+            <field name="name">hc_product_sale_report</field>
+            <field name="model">product.sale.report</field>
+            <field name="arch" type="xml">
+                <search string="Search Opportunities">
+                    <!--                    <field name="enquiry_no" string="Enquiry No" filter_domain="[('enquiry_no', 'ilike', self)]"/>-->
+                    <!--                    <field name="enquiry_no"/>-->
+                    <separator/>
+<!--                        <field name="product_id" filter_domain="['|', ('product_id','ilike',self),]" />-->
+                            <field name="product_id" string="Product Name" filter_domain="['|', ('product_id', 'ilike', self), ('barcode', 'ilike', self), ('default_code', 'ilike', self)]"/>
+
+
+<!--                     <filter string="Unread Messages" name="message_needaction"-->
+<!--                            domain="[('message_needaction','=',True)]"/>-->
+                    <filter string="Product" name="product_id" />
+
+                </search>
+            </field>
+        </record>
+
+        <record id="hc_closing_date_alteration_view" model="ir.ui.view">
+            <field name="name">Closing date alteration report</field>
+            <field name="model">product.sale.report</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_id"/>
+                    <field name="default_code"/>
+                    <field name="barcode"/>
+                    <field name="ordered_qty"/>
+<!--                    <field name="invoiced_qty"/>-->
+                    <field name="total_sales" sum="total_sales"/>
+                    <field name="total_cost" sum="total_cost"/>
+                    <field name="gross_profit" sum="gross_profit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hc_closing_date_alteration">
+            <field name="name">POS product sale report</field>
+            <field name="res_model">product.sale.report</field>
+            <field name="view_mode">tree</field>
+            <field name="search_view_id" ref="hc_pos_orderline_report.hc_closing_date_alteration_filter"/>
+        </record>
+    </data>
+</odoo>
