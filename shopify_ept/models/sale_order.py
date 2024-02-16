@@ -790,7 +790,7 @@ class SaleOrder(models.Model):
             "order_id": self.id,
             "company_id": self.company_id.id,
             "product_uom": uom_id,
-            "name": product_name,
+            "name":  product.name and product.ids[0].name or False,
             "price_unit": price,
             "order_qty": quantity,
         }
