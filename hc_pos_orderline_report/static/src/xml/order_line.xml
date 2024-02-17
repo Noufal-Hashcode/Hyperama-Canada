@@ -1,0 +1,488 @@
+<templates>
+    <t t-name="OrderLineTemp">
+        <div class="">
+            <div class="">
+                <h1 style="padding:10px">
+                    VAT Report
+                </h1>
+
+            </div>
+
+            <div>
+                <div class="filter_view_tb"></div>
+            </div>
+            <br></br>
+            <div>
+                <div class="table_view_tb" style="right:20px;"></div>
+            </div>
+        </div>
+    </t>
+<!--    <t t-name="TrialTable">-->
+<!--        <div>-->
+<!--            <div class="table_main_view">-->
+<!--                <table cellspacing="0" width="100%" style="font-size:13pt;">-->
+<!--                    <thead>-->
+<!--                        <tr>-->
+<!--                            <th>Sl. No.</th>-->
+
+<!--                            <th colspan="6" class="mon_fld">Particulars</th>-->
+<!--                            <th class="mon_fld">Amount (AED)</th>-->
+<!--                            <th class="mon_fld">VAT Amount (AED)</th>-->
+<!--                            <th class="mon_fld">Adjustment (AED)</th>-->
+<!--                        </tr>-->
+<!--                    </thead>-->
+
+<!--                    <t t-set="total_amount" t-value="0.00"/>-->
+<!--                        <t t-set="total_vat_amount" t-value="0.00"/>-->
+
+
+<!--                    <tbody>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <th colspan="5">VAT on Sales and All Other Outputs</th>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black; ">-->
+<!--                                <td colspan="1">-->
+<!--                                    <span>1a</span>-->
+<!--                                </td>-->
+<!--                                <td colspan="6" class="text-right">-->
+<!--                                    <span>Standard rated supplies in Abu Dhabi</span>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['auh_local_supplies']"  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id, 'precision': 2}"/>&ndash;&gt;-->
+<!--                                    <span t-esc="lines['auh_local_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['auh_local_supplies']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['auh_local_output']"  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id, 'precision': 2}"/>&ndash;&gt;-->
+<!--                                    <span t-esc="lines['auh_local_output'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['auh_local_output']"/>-->
+<!--                                </td>-->
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>1b</td>-->
+<!--                                <td colspan="6">Standard rated supplies in Dubai</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['dxb_local_supplies']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+<!--                                    <span t-esc="lines['dxb_local_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['dxb_local_supplies']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['dxb_local_output']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="lines['dxb_local_output'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['dxb_local_output']"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>1c</td>-->
+<!--                                <td  colspan="6">Standard rated supplies in Sharjah</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['shj_local_supplies']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+<!--                                    <span t-esc="lines['shj_local_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['shj_local_supplies']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['shj_local_output']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+<!--                                    <span t-esc="lines['shj_local_output'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['shj_local_output']"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>1d</td>-->
+<!--                                <td colspan="6">Standard rated supplies in Ajman</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['ajm_local_supplies']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+<!--                                    <span t-esc="lines['ajm_local_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['ajm_local_supplies']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['ajm_local_output']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+<!--                                    <span t-esc="lines['ajm_local_output'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['ajm_local_output']"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>1e</td>-->
+<!--                                <td colspan="6">Standard rated supplies in Ras Al Khaimah</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['rak_local_supplies']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+<!--                                    <span t-esc="lines['rak_local_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['rak_local_supplies']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['rak_local_output']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="lines['rak_local_output'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['rak_local_output']"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>1f</td>-->
+<!--                                <td colspan="6">Standard rated supplies in Fujairah</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['fuj_local_supplies']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="lines['fuj_local_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['fuj_local_supplies']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['fuj_local_output']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="lines['fuj_local_output'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['fuj_local_output']"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>1g</td>-->
+<!--                                <td colspan="6">Standard rated supplies in Umm Al Quwain</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['uaq_local_supplies']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="lines['uaq_local_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['uaq_local_supplies']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['uaq_local_output']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="Math.round(lines['uaq_local_output'] * Math.pow(10, 2)) / Math.pow(10, 2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['uaq_local_supplies']"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>2</td>-->
+<!--                                <td colspan="6">Tax Refunds provided to Tourists under the Tax Refunds for Tourists Scheme</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['planet_tax_sales']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+<!--                                    <span t-esc="(lines['planet_tax_output']*100/5).toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + (lines['planet_tax_output']*100/5)"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['planet_tax_output']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="lines['planet_tax_output'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['planet_tax_output']"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>3</td>-->
+<!--                                <td colspan="6">Supplies subject to the reverse charge provisions</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['rcm_supplies']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="lines['rcm_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['rcm_supplies']"/>-->
+
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['rcm_output']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="lines['srcm_output'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['srcm_output']"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>4</td>-->
+<!--                                <td colspan="6">Zero rated supplies</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['nil_rate_supplies']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="lines['nil_rate_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['nil_rate_supplies']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>5</td>-->
+<!--                                <td colspan="6">Exempt supplies</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['exempt_supplies']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="lines['exempt_supplies'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['exempt_supplies']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>6</td>-->
+<!--                                <td colspan="6">Goods imported into the UAE</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['rcm_purchases']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="lines['rcm_purchases'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['rcm_purchases']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['rcm_input']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="lines['prcm_output'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['prcm_output']"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>7</td>-->
+<!--                                <td colspan="6">Adjustments to goods imported into the UAE</td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['import_adj']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="lines['import_adj'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_amount" t-value="total_amount + lines['import_adj']"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['import_input_adj']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="lines['import_input_adj'].toFixed(2)"/>-->
+<!--                                    <t t-set="total_vat_amount" t-value="total_vat_amount + lines['import_input_adj']"/>-->
+
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>8</td>-->
+<!--                                <th colspan="6">Totals</th>-->
+<!--                                <th class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-out="total_amount"&ndash;&gt;-->
+<!--&lt;!&ndash;                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id, 'precision': 2}"/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="total_amount.toFixed(2)"/>-->
+<!--                                </th>-->
+<!--                                <th class="text-right">-->
+
+
+<!--                                    <span t-esc="total_vat_amount.toFixed(2)"/>-->
+<!--&lt;!&ndash;                                    <span t-out="total_vat_amount" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id, 'precision': 2}"/>&ndash;&gt;-->
+<!--                                </th>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--&lt;!&ndash;                                <td></td>&ndash;&gt;-->
+<!--                                <th colspan="5">VAT on Expenses and All Other Inputs</th>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>9</td>-->
+<!--                                <th colspan="6">Standard rated expenses</th>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['std_exp']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="Math.round(lines['std_exp'] * Math.pow(10, 2)) / Math.pow(10, 2)"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['std_exp_input']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="lines['std_exp_input'].toFixed(2)"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>10</td>-->
+<!--                                <th colspan="6">Supplies subject to the reverse charge provisions</th>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['rcm_purchases']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+<!--                                    <span t-esc="Math.round(lines['rcm_purchases'] * Math.pow(10, 2)) / Math.pow(10, 2)"/>-->
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['rcm_input']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                    <span t-esc="lines['prcm_input'].toFixed(2)"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+
+
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>11</td>-->
+<!--                                <th colspan="6">Totals</th>-->
+<!--                                <th class="text-right">-->
+
+<!--                                    <span t-esc="Math.round((lines['std_exp'] + lines['rcm_purchases']) * Math.pow(10, 2)) / Math.pow(10, 2)"/>-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['std_exp'] + lines['rcm_purchases']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>&ndash;&gt;-->
+<!--                                </th>-->
+<!--                                <th class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['std_exp_input'] + lines['rcm_input']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>&ndash;&gt;-->
+<!--                                    <span t-esc="(lines['std_exp_input'] + lines['prcm_input']).toFixed(2)"/>-->
+<!--                                </th>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <th colspan="6">Net VAT Due</th>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>12</td>-->
+<!--                                <th colspan="6">Total value of due tax for the period</th>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="total_vat_amount" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--                                    <span t-esc="total_vat_amount.toFixed(2)"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <td>13</td>-->
+<!--                                <th colspan="6">Total value of recoverable tax for the period</th>-->
+<!--                                <td class="text-right">-->
+<!--&lt;!&ndash;                                    <span t-esc="lines['std_exp_input'] + lines['rcm_input']" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+
+
+<!--                                </td>-->
+<!--                                <td class="text-right">-->
+<!--                                    <span t-esc="(lines['std_exp_input'] + lines['prcm_input']).toFixed(2)"/>-->
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+<!--                            <tr style="border-color: black;border-style: solid; !important; border: 1.5px solid black;">-->
+<!--                                <th>14</th>-->
+<!--                                <th colspan="6">Payable tax for the period</th>-->
+<!--                                <th class="text-right">-->
+
+
+<!--&lt;!&ndash;                                    <span t-esc="(total_vat_amount) - (lines['std_exp_input'] + lines['rcm_input'])" t-options='{"widget": "float", "precision": 2}'/>&ndash;&gt;-->
+<!--                                </th>-->
+<!--                                <td class="text-right">-->
+<!--                                    <span t-esc="((total_vat_amount) - (lines['std_exp_input'] + lines['prcm_input'])).toFixed(2)"/>-->
+
+<!--                                </td>-->
+
+<!--                                <td></td>-->
+<!--                            </tr>-->
+
+
+<!--                        </tbody>-->
+
+
+<!--                </table>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </t>-->
+
+
+<!--    <t t-name="TrialFilterView">-->
+<!--        <div class="row" style="margin-right: 10px; margin-left: 10px;">-->
+<!--            <div class="sub_container_left" style="width:70%;">-->
+<!--                <div class="report_print">-->
+<!--                    <button type="button" class="btn btn-primary" id="pdf"-->
+<!--                            style="position: relative;height:30px;color:white;background-color: #00A0AD;border-color: #00A0AD; padding:3px;">-->
+<!--                        Print (PDF)-->
+<!--                    </button>-->
+<!--                    <button type="button" class="btn btn-primary" id="xlsx"-->
+<!--                            style="position: relative;height:30px;color:white;background-color: #00A0AD;border-color: #00A0AD; padding:3px;">-->
+<!--                        Export (XLSX)-->
+<!--                    </button>-->
+
+<!--                    <button type="button" class="btn btn-primary" id="vat"-->
+<!--                            style="position: relative;height:30px;color:white;background-color: #00A0AD;border-color: #00A0AD; padding:3px;">-->
+<!--                        Closing VAT-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <br></br>-->
+<!--            <div class="row" style="width:30%;height:3%;top:0px;position: relative;">-->
+
+<!--                        <div class="time_range" style="">-->
+<!--                            <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" >-->
+<!--                                <span class="fa fa-calendar" title="Dates" role="img" aria-label="Dates"></span>-->
+<!--                                Date Range-->
+<!--                            </a>-->
+<!--                            <div class="dropdown-menu" role="menu">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label class="" for="date_from">Start Date :</label>-->
+<!--                                        <div class="input-group date" id="date_from" data-target-input="nearest">-->
+<!--&lt;!&ndash;                                            <t t-set='date_formatted'><t t-options='{"widget": "date"}' t-esc="filter_data.date_from"/></t>&ndash;&gt;-->
+<!--&lt;!&ndash;                                            <input type="text" name="date_from" class="form-control datetimepicker-input" t-att-value="date_formatted"  data-target="#date_from" t-att-name="prefix"/>&ndash;&gt;-->
+<!--                                            <input type="text" name="date_from" class="form-control datetimepicker-input" data-target="#date_from" t-att-name="prefix"/>-->
+
+<!--                                            <div class="input-group-append" data-target="#date_from" data-bs-toggle="datetimepicker">-->
+<!--                                                <span class="input-group-text">-->
+<!--                                                    <span class="fa fa-calendar" role="img" aria-label="Calendar"></span>-->
+<!--                                                </span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
+<!--                                    <label class="" for="date_to">End Date :</label>-->
+<!--                                    <div class="input-group date" id="date_to" data-target-input="nearest">-->
+
+<!--                                        <input type="text" name="date_to" class="form-control datetimepicker-input" data-target="#date_to" t-att-name="prefix"/>-->
+<!--                                        <div class="input-group-append" data-target="#date_to" data-bs-toggle="datetimepicker">-->
+<!--                                            <span class="input-group-text">-->
+<!--                                                <span class="fa fa-calendar" role="img" aria-label="Calendar"></span>-->
+<!--                                            </span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="search-Target-move" style="">-->
+<!--                            <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown">-->
+<!--                                <span class="fa fa-filter"></span>-->
+<!--                                Report Type:-->
+<!--                            </a>-->
+<!--                            <select id="entries" class="dropdown-menu target_move" name="states[]">-->
+<!--                                <div role="separator" class="dropdown-divider"></div>-->
+<!--                                <option value="default">Default</option>-->
+<!--                                <option value="consolidated">Consolidated</option>-->
+<!--                            </select>-->
+<!--                            <span id="post_res"></span>-->
+<!--                        </div>-->
+<!--                        <div style="">-->
+<!--                            <button type="button" id="apply_filter" class="btn btn-primary"-->
+<!--                                    style="top:0px;height:30px;color:white;background-color: #00A0AD;border-color: #00A0AD;">-->
+<!--                                Apply-->
+<!--                            </button>-->
+
+<!--                        </div>-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </t>-->
+
+</templates>

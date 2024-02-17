@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+<!--        <record model="ir.ui.view" id="hc_closing_date_alteration_filter">-->
+<!--            <field name="name">hc.closing.date.alteration</field>-->
+<!--            <field name="model">product.sale.report</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <search string="Search Opportunities">-->
+<!--&lt;!&ndash;                    <field name="enquiry_no" string="Enquiry No" filter_domain="[('enquiry_no', 'ilike', self)]"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="enquiry_no"/>&ndash;&gt;-->
+<!--                    <separator/>-->
+<!--                </search>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="hc_closing_date_alteration_view" model="ir.ui.view">-->
+<!--            <field name="name">Closing date alteration report</field>-->
+<!--            <field name="model">product.sale.report</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree>-->
+<!--                    <field name="product_id"/>-->
+<!--&lt;!&ndash;                    <field name="previous_deadline_date"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="updated_deadline"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="reason"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="changed_by"/>&ndash;&gt;-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record model="ir.actions.act_window" id="action_hc_closing_date_alteration">-->
+<!--            <field name="name">Closing date alteration report</field>-->
+<!--            <field name="res_model">product.sale.report</field>-->
+<!--            <field name="view_mode">tree</field>-->
+<!--            <field name="search_view_id" ref="hc_pos_orderline_report.hc_closing_date_alteration_filter"/>-->
+<!--        </record>-->
+    </data>
+<!--    <menuitem id="product_sale_report"-->
+<!--              name="Product Sale Report"-->
+<!--              parent="point_of_sale.menu_point_of_sale"-->
+<!--              action="action_window_date_updating_wizard"-->
+<!--              sequence="3"/>-->
+
+
+</odoo>
+
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+
+<!--    <record id="action_account_report_gt1" model="ir.actions.client">-->
+<!--        <field name="name">Tax Report</field>-->
+<!--        <field name="tag">account_reports</field>-->
+<!--&lt;!&ndash;        <field name="context" eval="{'report_id': ref('hc_pos_orderline_report.generic_tax_report1')}"/>&ndash;&gt;-->
+<!--    </record>-->
+<!--      <record id="generic_tax_report1" model="account.report">-->
+<!--            <field name="name">Generic Tax report</field>-->
+<!--            <field name="filter_multi_company">tax_units</field>-->
+<!--            <field name="filter_fiscal_position" eval="1"/>-->
+<!--            <field name="default_opening_date_filter">last_tax_period</field>-->
+<!--            <field name="only_tax_exigible" eval="True"/>-->
+<!--            <field name="column_ids">-->
+<!--                <record id="generic_tax_report_column_net" model="account.report.column">-->
+<!--                    <field name="name">Net</field>-->
+<!--                    <field name="expression_label">net</field>-->
+<!--                    <field name="figure_type">monetary</field>-->
+<!--                </record>-->
+<!--                <record id="generic_tax_report_column_tax" model="account.report.column">-->
+<!--                    <field name="name">Tax</field>-->
+<!--                    <field name="expression_label">tax</field>-->
+<!--                    <field name="figure_type">monetary</field>-->
+<!--                </record>-->
+<!--            </field>-->
+<!--        </record>-->
+<!-- <menuitem id="menu_action_account_report_gt1"-->
+<!--              name="Order Line Reporta" action="action_account_report_gt1"-->
+<!--              parent="point_of_sale.menu_point_of_sale"-->
+<!--              sequence="50"/>-->
+
+<!--    &lt;!&ndash;    <menuitem id="ordr_line"&ndash;&gt;-->
+<!--    &lt;!&ndash;              name="POS Order Line"&ndash;&gt;-->
+<!--    &lt;!&ndash;              parent="point_of_sale.menu_point_of_sale"&ndash;&gt;-->
+<!--    &lt;!&ndash;              action="hc_pos_orderline_report.order_line"&ndash;&gt;-->
+<!--    &lt;!&ndash;              sequence="50"/>&ndash;&gt;-->
+<!--    &lt;!&ndash;    <record id="order_line" model="ir.actions.act_window">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <field name="name">Pos Order Line</field>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <field name="res_model">pos.order.line</field>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <field name="view_mode">tree</field>&ndash;&gt;-->
+<!--    &lt;!&ndash;        <field name="help" type="html">&ndash;&gt;-->
+<!--    &lt;!&ndash;            <p class="o_view_nocontent_smiling_face">&ndash;&gt;-->
+<!--    &lt;!&ndash;                Create a new customer in your address book&ndash;&gt;-->
+<!--    &lt;!&ndash;            </p>&ndash;&gt;-->
+<!--    &lt;!&ndash;            <p>&ndash;&gt;-->
+<!--    &lt;!&ndash;                Odoo helps you easily track all activities related to a customer.&ndash;&gt;-->
+<!--    &lt;!&ndash;            </p>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </field>&ndash;&gt;-->
+<!--    &lt;!&ndash;    </record>&ndash;&gt;-->
+<!--</odoo>-->
