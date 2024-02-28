@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_daily_sales_document">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <t>
+
+                        <div style="font-size:19px;font-weight:bold;text-align:center;">
+                            Daily Sales Report
+                        </div>
+                        <div class="row">
+                            <span style="font-size:16px;text-align:left;padding-left:15px;">
+                                Date:
+                                <span t-esc="date"/>
+                            </span>
+                        </div>
+                        <table class="table table-bordered" id="table_sss">
+                            <thead>
+                                <tr>
+                                    <th>Division</th>
+<!--                                    <th>Date</th>-->
+                                    <t t-foreach="payment_method" t-as="method">
+                                        <th>
+                                            <span t-esc="method"/>
+                                        </th>
+                                    </t>
+                                    <th>Total</th>
+                                    <th>Gross Profit</th>
+                                    <th>GP%</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="lines" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="line['division_name']"/>
+
+                                        </td>
+<!--                                        <td>-->
+<!--                                            <span t-esc="line['date']"/>-->
+
+<!--                                        </td>-->
+                                        <t t-foreach="payment_method" t-as="method">
+                                            <td>
+                                                <span t-esc="line[method]"/>
+                                            </td>
+                                        </t>
+                                        <td>
+                                            <span t-esc="line['total']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line['gross']"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="line['gross_percent']">%</span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <!-- Page Break -->
+                        <p style="page-break-before:always;"/>
+                    </t>
+                </div>
+            </t>
+        </template>
+
+        <template id="daily_sales_report_template">
+            <t t-call="web.html_container">
+                <t t-call="hc_daily_sales_report.report_daily_sales_document"/>
+            </t>
+        </template>
+
+    </data>
+</odoo>
