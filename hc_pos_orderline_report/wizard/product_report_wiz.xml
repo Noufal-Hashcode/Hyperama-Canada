@@ -23,7 +23,7 @@
             </field>
         </record>
         <record id="action_window_date_updating_wizard" model="ir.actions.act_window">
-            <field name="name">Expected Date alteration view</field>
+            <field name="name">POS Product Sale Report</field>
             <field name="res_model">product.report.wiz</field>
             <field name="type">ir.actions.act_window</field>
             <field name="view_mode">form</field>

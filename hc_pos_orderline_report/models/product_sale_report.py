@@ -9,6 +9,11 @@ import json
 import time
 from odoo.http import request
 
+class PosOrderLine(models.Model):
+    _inherit = "pos.order.line"
+
+    date_order = fields.Datetime(related='order_id.date_order', string='Order Date', store=True, readonly=True)
+
 
 class ProducrSaleReport(models.Model):
     _name = "product.sale.report"
@@ -24,4 +29,11 @@ class ProducrSaleReport(models.Model):
     )
     total_cost =fields.Float('Total Cost' )
     gross_profit =fields.Float('GP' )
+
+    def print_report(self):
+        # Get all records
+        records = self.search([])
+
+        # Render the report template
+        return self.env.ref('hc_pos_orderline_report.report_product_sale').report_action(records)
 
