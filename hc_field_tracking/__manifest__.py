@@ -2,7 +2,7 @@
     'name': 'Field Tracking',
     'version': '17.0.1.0',
     'author': 'Hash Code IT Solutions',
-    'summary': 'Import Product Images',
+    'summary': 'Field Tracking',
     'description': """This module for Import Products From Local Storage And URLs.""",
     'category': 'Products/ImportImages',
     'website': 'info@hashcodeit.com',
