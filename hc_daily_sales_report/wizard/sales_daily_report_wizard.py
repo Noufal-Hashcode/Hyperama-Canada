@@ -85,11 +85,12 @@ class SalesDailyReportWizard(models.TransientModel):
             'subject': 'Daily Sales Report',
             'body_html': '<p>Please find attached the daily sales report.</p>',
             'email_from': self.env.user.email,
-            'email_to': recipients,
+            'email_to': ','.join(recipients),
             'attachment_ids': [(4, attachment.id)],  # Associate the attachment with the email
         }
-        mail = self.env['mail.mail'].create(mail_values)
-        mail.send()
+        mail = self.env['mail.mail'].sudo().create(mail_values)
+
+        mail.sudo().send()
 
 
 
