@@ -40,17 +40,8 @@ patch(ProductScreen.prototype, {
 
 
                 if (active_pass.includes(Sha1.hash(inputPin)) ||  active_pass.includes(parseInt(inputPin))){
-                    const result = super.onNumpadClick("discount");
-                    if (result) {
-                        this.numberBuffer.reset();
-                        return true;
-                    } else {
-                        this.popup.add(ErrorPopup, {
-                            title: _t("Error"),
-                            body: _t("There is already an discount in progress."),
-                        });
-                        return false;
-                    }
+                    const result = super.onNumpadClick(buttonValue);
+
 
                 } else {
                     this.popup.add(ErrorPopup, {
@@ -65,17 +56,7 @@ patch(ProductScreen.prototype, {
         }
         else{
 
-            const result = super.onNumpadClick("discount");;
-            if (result) {
-                this.numberBuffer.reset();
-                return true;
-            } else {
-                this.popup.add(ErrorPopup, {
-                    title: _t("Error"),
-                    body: _t("There is already discount in progress."),
-                });
-                return false;
-            }
+            const result = super.onNumpadClick(buttonValue);
 
         }
     }
