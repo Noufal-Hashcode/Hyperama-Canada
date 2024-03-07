@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 from datetime import datetime, time, timedelta
 import base64
+import pytz
 
 
 class SalesDailyReportWizard(models.TransientModel):
@@ -12,10 +13,13 @@ class SalesDailyReportWizard(models.TransientModel):
         self.ensure_one()
         form_data = self.read()[0]
         form_data['company_id'] = self.env.company and self.env.company.id or False
+        tz = pytz.timezone(self.env.user.tz or 'UTC')
         if self.date:
-            form_data['start_date'] = self.date
+            date = datetime.combine(self.date, time.min)
+            # form_data['start_date'] = self.date
+            form_data['start_date'] = pytz.utc.localize(date).astimezone(tz)
         else:
-            form_data['start_date'] = fields.Datetime.today()
+            form_data['start_date'] = pytz.utc.localize(fields.Datetime.today()).astimezone(tz)
         # form_data['end_date'] = self.date + timedelta(days=1)
         form_data['end_date'] = datetime.combine(form_data['start_date'], time.max)
         data = {
@@ -35,10 +39,12 @@ class SalesDailyReportWizard(models.TransientModel):
         # Generate the report content
         form_data = self.read()[0]
         form_data['company_id'] = self.env.company and self.env.company.id or False
+        tz = pytz.timezone(self.env.user.tz or 'UTC')
         if self.date:
-            form_data['start_date'] = self.date
+            date = datetime.combine(self.date, time.min)
+            form_data['start_date'] = pytz.utc.localize(date).astimezone(tz)
         else:
-            form_data['start_date'] = fields.Datetime.today()
+            form_data['start_date'] = pytz.utc.localize(fields.Datetime.today()).astimezone(tz)
         # form_data['end_date'] = self.date + timedelta(days=1)
         form_data['end_date'] = datetime.combine(form_data['start_date'], time.max)
         context = dict(self.env.context)
@@ -83,7 +89,7 @@ class SalesDailyReportWizard(models.TransientModel):
         # Send the report via email to the recipients
         mail_values = {
             'subject': 'Daily Sales Report',
-            'body_html': '<p>Please find attached the daily sales report.</p>',
+            'body_html': '<p>Please find attached daily sales report.</p>',
             'email_from': self.env.user.email,
             'email_to': ','.join(recipients),
             'attachment_ids': [(4, attachment.id)],  # Associate the attachment with the email
