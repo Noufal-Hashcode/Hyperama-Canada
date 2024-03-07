@@ -308,11 +308,11 @@ class SaleOrder(models.Model):
             Migration done by Haresh Mori on September 2021
         """
         move_line_obj = self.env['account.move.line']
-        domain = [('account_internal_type', 'in', ('receivable', 'payable')),
+        domain = [('account_type', 'in', ('receivable', 'payable')),
                   ('reconciled', '=', False)]
         line_ids = move_line_obj.search([('move_id', '=', invoice.id)])
         to_reconcile = [line_ids.filtered( \
-            lambda line: line.account_internal_type == 'receivable')]
+            lambda line: line.account_type == 'asset_receivable')]
 
         for payment, lines in zip([payment_id], to_reconcile):
             payment_lines = payment.line_ids.filtered_domain(domain)
