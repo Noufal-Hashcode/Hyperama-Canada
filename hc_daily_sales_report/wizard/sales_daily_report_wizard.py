@@ -24,7 +24,7 @@ class SalesDailyReportWizard(models.TransientModel):
             date = datetime.combine(current_date, time.min)
             form_data['start_date'] = pytz.utc.localize(date).astimezone(tz)
         # form_data['end_date'] = self.date + timedelta(days=1)
-        form_data['end_date'] = pytz.utc.localize(datetime.combine(start_date, time.max)).astimezone(tz)
+        form_data['end_date'] = pytz.utc.localize(datetime.combine(current_date , time.max)).astimezone(tz)
         data = {
             'ids': self.env.context.get('active_ids', []),
             'model': self.env.context.get('active_model', 'ir.ui.menu'),
