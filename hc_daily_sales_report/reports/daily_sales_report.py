@@ -25,19 +25,19 @@ class ReportsaleSummary(models.AbstractModel):
             if division.name == "None":
                 orders = self.env["pos.order.line"].sudo().search([
                     ('order_id.date_order', '>=', start_date),
-                    ('order_id.date_order', '<', end_date),('product_id.detailed_type', '!=', 'service'),
+                    ('order_id.date_order', '<=', end_date),('product_id.detailed_type', '!=', 'service'),
                     ('product_id.division', '=', False)  # Orders with no division
                 ])
             elif division.name == "Promotion":
                 orders = self.env["pos.order.line"].sudo().search([
                     ('order_id.date_order', '>=', start_date),
-                    ('order_id.date_order', '<', end_date), ('product_id.detailed_type', '=', 'service'),
+                    ('order_id.date_order', '<=', end_date), ('product_id.detailed_type', '=', 'service'),
                     '|',('product_id.division', '=', False),('product_id.division', '=', division.id)  # Orders with no division
                 ])
             else:
                 orders = self.env["pos.order.line"].sudo().search([
                     ('order_id.date_order', '>=', start_date),
-                    ('order_id.date_order', '<', end_date),
+                    ('order_id.date_order', '<=', end_date),
                     ('product_id.division', '=', division.id)
                 ])
             data = {'division_name': division.name,
@@ -80,15 +80,15 @@ class ReportsaleSummary(models.AbstractModel):
         lines = self.sales_report_data(start_date,end_date)
         tz = pytz.timezone('Asia/Dubai')
         date_format = '%Y-%m-%d %H:%M:%S'
-        start_datetime = datetime.strptime(start_date, date_format)
-        start = pytz.utc.localize(start_datetime).astimezone(tz)
+        # start_datetime = datetime.strptime(start_date, date_format)
+        # start = pytz.utc.localize(start_datetime).astimezone(tz)
 
         docargs = {
             'doc_ids': docids,
             'doc_model': model,
             'data': data['form'],
             'docs': docs,
-            'date': start.date(),
+            'date': start_date.date(),
             'company_name': self.env.user.company_id.name,
             'lines': lines,
             'payment_method': payments

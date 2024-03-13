@@ -7,7 +7,8 @@ import pytz
 class SalesDailyReportWizard(models.TransientModel):
     _name = 'daily.sales.report.wizard'
 
-    date = fields.Date('Date')
+    from_date = fields.Datetime('From Date')
+    to_date = fields.Datetime('To Date')
 
     def print_daily_report(self):
         self.ensure_one()
@@ -17,19 +18,17 @@ class SalesDailyReportWizard(models.TransientModel):
         # tz = pytz.timezone('UTC')
         # tz = pytz.timezone("America/Toronto")
         tz = pytz.timezone('Asia/Dubai')
-        if self.date:
-            current_date = self.date
-            date = datetime.combine(current_date, time.min)
-            start = tz.localize(date)
-            form_data['start_date'] = start.astimezone(pytz.utc)
+        if self.from_date:
+            # current_date = self.date
+            # date = self.from_date
+            # start = tz.localize(date)
+            form_data['start_date'] = self.from_date
         else:
             current_date = datetime.now().date()
             date = datetime.combine(current_date, time.min)
             start = tz.localize(date)
             form_data['start_date'] = start.astimezone(pytz.utc)
-        end = tz.localize(datetime.combine(current_date, time.max))
-        form_data['end_date'] = end.astimezone(pytz.utc)
-        print("fjdsjfkfj", form_data['start_date'], form_data['end_date'])
+        form_data['end_date'] = self.to_date
         data = {
             'ids': self.env.context.get('active_ids', []),
             'model': self.env.context.get('active_model', 'ir.ui.menu'),
@@ -50,11 +49,8 @@ class SalesDailyReportWizard(models.TransientModel):
         # tz = pytz.timezone(self.env.user.tz or 'UTC')
         # tz = pytz.timezone("America/Toronto")
         tz = pytz.timezone('Asia/Dubai')
-        if self.date:
-            current_date = self.date
-            date = datetime.combine(current_date, time.min)
-            start = tz.localize(date)
-            form_data['start_date'] = start.astimezone(pytz.utc)
+        if self.from_date:
+            form_data['start_date'] = self.from_date
         else:
             current_date = datetime.now().date()
             date = datetime.combine(current_date, time.min)
