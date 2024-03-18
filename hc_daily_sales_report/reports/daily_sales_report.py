@@ -30,10 +30,8 @@ class ReportsaleSummary(models.AbstractModel):
             for method in methods:
                 globals()[method] = 0.00
                 for rec in orders:
-                    if rec.order_id.payment_ids:
-                        for payment in rec.order_id.payment_ids:
-                            if payment.payment_method_id.name == method:
-                                globals()[method] += rec.price_subtotal_incl
+                    if rec.order_id.payment_ids.payment_method_id[0].name == method:
+                        globals()[method] += rec.price_subtotal_incl
                 data[method] = round(globals()[method],4)
 
 
