@@ -13,18 +13,23 @@ class SalesDailyReportWizard(models.TransientModel):
         self.ensure_one()
         form_data = self.read()[0]
         form_data['company_id'] = self.env.company and self.env.company.id or False
-        # tz = pytz.timezone(self.env.user.tz or 'UTC')
-        tz = pytz.timezone("America/Toronto")
+
+        # tz = pytz.timezone('UTC')
+        # tz = pytz.timezone("America/Toronto")
+        tz = pytz.timezone('Asia/Dubai')
         if self.date:
             current_date = self.date
             date = datetime.combine(current_date, time.min)
-            form_data['start_date'] = pytz.utc.localize(date).astimezone(tz)
+            start = tz.localize(date)
+            form_data['start_date'] = start.astimezone(pytz.utc)
         else:
             current_date = datetime.now().date()
             date = datetime.combine(current_date, time.min)
-            form_data['start_date'] = pytz.utc.localize(date).astimezone(tz)
-        # form_data['end_date'] = self.date + timedelta(days=1)
-        form_data['end_date'] = pytz.utc.localize(datetime.combine(current_date , time.max)).astimezone(tz)
+            start = tz.localize(date)
+            form_data['start_date'] = start.astimezone(pytz.utc)
+        end = tz.localize(datetime.combine(current_date, time.max))
+        form_data['end_date'] = end.astimezone(pytz.utc)
+        print("fjdsjfkfj", form_data['start_date'], form_data['end_date'])
         data = {
             'ids': self.env.context.get('active_ids', []),
             'model': self.env.context.get('active_model', 'ir.ui.menu'),
@@ -43,18 +48,20 @@ class SalesDailyReportWizard(models.TransientModel):
         form_data = self.read()[0]
         form_data['company_id'] = self.env.company and self.env.company.id or False
         # tz = pytz.timezone(self.env.user.tz or 'UTC')
-        tz = pytz.timezone("America/Toronto")
+        # tz = pytz.timezone("America/Toronto")
+        tz = pytz.timezone('Asia/Dubai')
         if self.date:
             current_date = self.date
-            date = datetime.combine(self.date, time.min)
-            form_data['start_date'] = pytz.utc.localize(date).astimezone(tz)
+            date = datetime.combine(current_date, time.min)
+            start = tz.localize(date)
+            form_data['start_date'] = start.astimezone(pytz.utc)
         else:
-            current_date = datetime.now(tz).date()
-            form_data['start_date'] = pytz.utc.localize(datetime.combine(current_date, datetime.min.time())).astimezone(tz)
-            # date = datetime.combine(current_date, time.min)
-            # form_data['start_date'] = pytz.utc.localize(date).astimezone(tz)
-        # form_data['end_date'] = self.date + timedelta(days=1)
-        form_data['end_date'] = pytz.utc.localize(datetime.combine(current_date, datetime.max.time())).astimezone(tz)
+            current_date = datetime.now().date()
+            date = datetime.combine(current_date, time.min)
+            start = tz.localize(date)
+            form_data['start_date'] = start.astimezone(pytz.utc)
+        end = tz.localize(datetime.combine(current_date, time.max))
+        form_data['end_date'] = end.astimezone(pytz.utc)
         context = dict(self.env.context)
         context['active_model'] = self._name
         data = {
