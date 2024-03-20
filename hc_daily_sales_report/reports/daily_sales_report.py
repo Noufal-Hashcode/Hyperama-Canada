@@ -1,8 +1,9 @@
 from odoo import api, models, _
 from odoo.exceptions import UserError
-from datetime import datetime, timedelta
 import datetime
+from datetime import datetime, timedelta
 import base64
+import pytz
 
 class ReportsaleSummary(models.AbstractModel):
     _name = 'report.hc_daily_sales_report.daily_sales_report_template'
@@ -20,7 +21,7 @@ class ReportsaleSummary(models.AbstractModel):
                 ('order_id.date_order', '<', end_date),
                 ('product_id.division', '=', division.id)
             ])
-            data = {'division_name':division.name,
+            data = {'division_name': division.name,
                     'date': start_date,
                     'total': round(sum(orders.mapped('price_subtotal_incl')),3),
                     'gross':round(sum(orders.mapped('margin')),3),
@@ -29,10 +30,8 @@ class ReportsaleSummary(models.AbstractModel):
             for method in methods:
                 globals()[method] = 0.00
                 for rec in orders:
-                    if rec.order_id.payment_ids:
-                        for payment in rec.order_id.payment_ids:
-                            if payment.payment_method_id.name == method:
-                                globals()[method] += rec.price_subtotal_incl
+                    if rec.order_id.payment_ids and rec.order_id.payment_ids.payment_method_id[0].name == method:
+                        globals()[method] += rec.price_subtotal_incl
                 data[method] = round(globals()[method],4)
 
 
@@ -60,13 +59,17 @@ class ReportsaleSummary(models.AbstractModel):
         end_date = form_data['end_date']
         payments = self.get_payment_methods()
         lines = self.sales_report_data(start_date,end_date)
+        tz = pytz.timezone('Asia/Dubai')
+        date_format = '%Y-%m-%d %H:%M:%S'
+        start_datetime = datetime.strptime(start_date, date_format)
+        start = pytz.utc.localize(start_datetime).astimezone(tz)
 
         docargs = {
             'doc_ids': docids,
             'doc_model': model,
             'data': data['form'],
             'docs': docs,
-            'date': start_date,
+            'date': start.date(),
             'company_name': self.env.user.company_id.name,
             'lines': lines,
             'payment_method': payments
