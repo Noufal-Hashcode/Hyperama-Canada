@@ -12,15 +12,25 @@ class ReportsaleSummary(models.AbstractModel):
     def sales_report_data(self,start_date,end_date):
 
         data_list = []
-        divisions = self.env["product.division"].search([])
+        exist_divisions = self.env["product.division"].search([])
         methods = self.get_payment_methods()
+        none_division = self.env["product.division"].browse([-1])  # Using a negative ID to indicate a temporary record
+        none_division.name = 'None'
+        divisions = exist_divisions + none_division
 
         for division in divisions:
-            orders = self.env["pos.order.line"].sudo().search([
-                ('order_id.date_order', '>=', start_date),
-                ('order_id.date_order', '<', end_date),
-                ('product_id.division', '=', division.id)
-            ])
+            if division.name == "None":
+                orders = self.env["pos.order.line"].sudo().search([
+                    ('order_id.date_order', '>=', start_date),
+                    ('order_id.date_order', '<', end_date),
+                    ('product_id.division', '=', False)  # Orders with no division
+                ])
+            else:
+                orders = self.env["pos.order.line"].sudo().search([
+                    ('order_id.date_order', '>=', start_date),
+                    ('order_id.date_order', '<', end_date),
+                    ('product_id.division', '=', division.id)
+                ])
             data = {'division_name': division.name,
                     'date': start_date,
                     'total': round(sum(orders.mapped('price_subtotal_incl')),3),
