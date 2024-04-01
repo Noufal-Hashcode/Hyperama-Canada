@@ -80,8 +80,12 @@ class ReportsaleSummary(models.AbstractModel):
         lines = self.sales_report_data(start_date,end_date)
         tz = pytz.timezone("America/Toronto")
         date_format = '%Y-%m-%d %H:%M:%S'
-        start_datetime = datetime.strptime(start_date, date_format)
-        start = pytz.utc.localize(start_datetime).astimezone(tz)
+        if type(start_date) == str:
+            start_datetime = datetime.strptime(start_date, date_format)
+            start = pytz.utc.localize(start_datetime).astimezone(tz)
+        else:
+            start = start_date
+
 
         docargs = {
             'doc_ids': docids,
