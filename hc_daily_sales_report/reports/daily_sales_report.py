@@ -16,14 +16,23 @@ class ReportsaleSummary(models.AbstractModel):
         methods = self.get_payment_methods()
         none_division = self.env["product.division"].browse([-1])  # Using a negative ID to indicate a temporary record
         none_division.name = 'None'
+        # divisions = exist_divisions + none_division
+        # promotion_division = self.env["product.division"].browse([-2])  # Using a negative ID to indicate a temporary record
+        # promotion_division.name = 'Promotion'
         divisions = exist_divisions + none_division
 
         for division in divisions:
             if division.name == "None":
                 orders = self.env["pos.order.line"].sudo().search([
                     ('order_id.date_order', '>=', start_date),
-                    ('order_id.date_order', '<', end_date),
+                    ('order_id.date_order', '<', end_date),('product_id.detailed_type', '!=', 'service'),
                     ('product_id.division', '=', False)  # Orders with no division
+                ])
+            elif division.name == "Promotion":
+                orders = self.env["pos.order.line"].sudo().search([
+                    ('order_id.date_order', '>=', start_date),
+                    ('order_id.date_order', '<', end_date), ('product_id.detailed_type', '=', 'service'),
+                    '|',('product_id.division', '=', False),('product_id.division', '=', division.id)  # Orders with no division
                 ])
             else:
                 orders = self.env["pos.order.line"].sudo().search([
