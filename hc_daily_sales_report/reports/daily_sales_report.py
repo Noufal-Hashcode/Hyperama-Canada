@@ -26,19 +26,19 @@ class ReportsaleSummary(models.AbstractModel):
                 orders = self.env["pos.order.line"].sudo().search([
                     ('order_id.date_order', '>=', start_date),
                     ('order_id.date_order', '<=', end_date),('product_id.detailed_type', '!=', 'service'),
-                    ('product_id.division', '=', False)  # Orders with no division
+                    ('product_id.division', '=', False),('order_id.state', 'not in', ['cancel', 'draft'])  # Orders with no division
                 ])
             elif division.name == "Promotion":
                 orders = self.env["pos.order.line"].sudo().search([
                     ('order_id.date_order', '>=', start_date),
                     ('order_id.date_order', '<=', end_date), ('product_id.detailed_type', '=', 'service'),
-                    '|',('product_id.division', '=', False),('product_id.division', '=', division.id)  # Orders with no division
+                    '|',('product_id.division', '=', False),('product_id.division', '=', division.id),('order_id.state', 'not in', ['cancel', 'draft'])  # Orders with no division
                 ])
             else:
                 orders = self.env["pos.order.line"].sudo().search([
                     ('order_id.date_order', '>=', start_date),
                     ('order_id.date_order', '<=', end_date),
-                    ('product_id.division', '=', division.id)
+                    ('product_id.division', '=', division.id),('order_id.state', 'not in', ['cancel', 'draft'])
                 ])
             data = {'division_name': division.name,
                     'date': start_date,
