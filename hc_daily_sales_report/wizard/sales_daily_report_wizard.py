@@ -16,8 +16,8 @@ class SalesDailyReportWizard(models.TransientModel):
         form_data['company_id'] = self.env.company and self.env.company.id or False
 
         # tz = pytz.timezone('UTC')
-        # tz = pytz.timezone("America/Toronto")
-        tz = pytz.timezone('Asia/Dubai')
+        tz = pytz.timezone("America/Toronto")
+        # tz = pytz.timezone('Asia/Dubai')
         if self.from_date:
             # current_date = self.date
             # date = self.from_date
@@ -47,10 +47,12 @@ class SalesDailyReportWizard(models.TransientModel):
         form_data = self.read()[0]
         form_data['company_id'] = self.env.company and self.env.company.id or False
         # tz = pytz.timezone(self.env.user.tz or 'UTC')
-        # tz = pytz.timezone("America/Toronto")
-        tz = pytz.timezone('Asia/Dubai')
+        tz = pytz.timezone("America/Toronto")
+        # tz = pytz.timezone('Asia/Dubai')
         if self.from_date:
+        #     current_date = datetime.now().date()
             form_data['start_date'] = self.from_date
+            # form_data['end_date'] = datetime(current_date + timedelta(hours=self.env.company.end_time))
         else:
             current_date = datetime.now().date()
             date = datetime.combine(current_date, time.min)
