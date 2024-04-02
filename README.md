@@ -1,13 +1,14 @@
 # Hyperama-Canada
+# HASH CODE IT SOLUTIONS
+      Design | Build | Deliver
 
-Hash Code IT Solutions - Hyperama canada implementation
-hashcodeit.com
 
+Odoo 16 odoo.sh project implemented by Hash Code IT Solutions, Dubai.
+##### Get in touch
+     Hash Code IT,
+     312, Al Fajer building A block,
+     Oud metha, Dubai, UAE
+     https://hashcodeit.com/
 
-Hash Code IT Solutions 
-312, Al Fajer building A block, 
-Oud metha, Dubai, UAE 
-https://hashcodeit.com/
-
-Get in touch info@hashcodeit.com
-971-58-528-8919
+     info@hashcodeit.com
+     +971 58 588 0687
