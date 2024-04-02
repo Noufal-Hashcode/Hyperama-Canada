@@ -44,8 +44,9 @@ class ReportsaleSummary(models.AbstractModel):
                     'date': start_date,
                     'total': round(sum(orders.mapped('price_subtotal_incl')),3),
                     'gross':round(sum(orders.mapped('margin')),3),
-                    'gross_percent':round(sum(orders.mapped('margin_percent')),3)
+                    # 'gross_percent':round(sum(orders.mapped('margin_percent')),3)
                     }
+            data['gross_percent'] = round((data['gross']/data['total'])*100,3)
             for method in methods:
                 globals()[method] = 0.00
                 for rec in orders:
