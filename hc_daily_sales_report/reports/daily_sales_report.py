@@ -78,17 +78,17 @@ class ReportsaleSummary(models.AbstractModel):
         end_date = form_data['end_date']
         payments = self.get_payment_methods()
         lines = self.sales_report_data(start_date,end_date)
-        tz = pytz.timezone('Asia/Dubai')
+        tz = pytz.timezone("America/Toronto")
         date_format = '%Y-%m-%d %H:%M:%S'
-        # start_datetime = datetime.strptime(start_date, date_format)
-        # start = pytz.utc.localize(start_datetime).astimezone(tz)
+        start_datetime = datetime.strptime(start_date, date_format)
+        start = pytz.utc.localize(start_datetime).astimezone(tz)
 
         docargs = {
             'doc_ids': docids,
             'doc_model': model,
             'data': data['form'],
             'docs': docs,
-            'date': start_date.date(),
+            'date': start.date(),
             'company_name': self.env.user.company_id.name,
             'lines': lines,
             'payment_method': payments
