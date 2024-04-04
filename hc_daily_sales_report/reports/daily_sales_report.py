@@ -46,7 +46,10 @@ class ReportsaleSummary(models.AbstractModel):
                     'gross':round(sum(orders.mapped('margin')),3),
                     # 'gross_percent':round(sum(orders.mapped('margin_percent')),3)
                     }
-            data['gross_percent'] = round((data['gross']/data['total'])*100,3)
+            if data['total']:
+                data['gross_percent'] = round((data['gross']/data['total'])*100,3)
+            else:
+                data['gross_percent'] = 0
             for method in methods:
                 globals()[method] = 0.00
                 for rec in orders:
