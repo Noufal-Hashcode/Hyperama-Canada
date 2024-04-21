@@ -12,21 +12,44 @@ class ReportsaleSummary(models.AbstractModel):
     def sales_report_data(self,start_date,end_date):
 
         data_list = []
-        divisions = self.env["product.division"].search([])
+        exist_divisions = self.env["product.division"].search([])
         methods = self.get_payment_methods()
+        none_division = self.env["product.division"].browse([-1])  # Using a negative ID to indicate a temporary record
+        none_division.name = 'None'
+        # divisions = exist_divisions + none_division
+        # promotion_division = self.env["product.division"].browse([-2])  # Using a negative ID to indicate a temporary record
+        # promotion_division.name = 'Promotion'
+        divisions = exist_divisions + none_division
 
         for division in divisions:
-            orders = self.env["pos.order.line"].sudo().search([
-                ('order_id.date_order', '>=', start_date),
-                ('order_id.date_order', '<', end_date),
-                ('product_id.division', '=', division.id)
-            ])
+            if division.name == "None":
+                orders = self.env["pos.order.line"].sudo().search([
+                    ('order_id.date_order', '>=', start_date),
+                    ('order_id.date_order', '<=', end_date),('product_id.detailed_type', '!=', 'service'),
+                    ('product_id.division', '=', False),('order_id.state', 'not in', ['cancel', 'draft'])  # Orders with no division
+                ])
+            elif division.name == "Promotion":
+                orders = self.env["pos.order.line"].sudo().search([
+                    ('order_id.date_order', '>=', start_date),
+                    ('order_id.date_order', '<=', end_date), ('product_id.detailed_type', '=', 'service'),
+                    '|',('product_id.division', '=', False),('product_id.division', '=', division.id),('order_id.state', 'not in', ['cancel', 'draft'])  # Orders with no division
+                ])
+            else:
+                orders = self.env["pos.order.line"].sudo().search([
+                    ('order_id.date_order', '>=', start_date),
+                    ('order_id.date_order', '<=', end_date),
+                    ('product_id.division', '=', division.id),('order_id.state', 'not in', ['cancel', 'draft'])
+                ])
             data = {'division_name': division.name,
                     'date': start_date,
                     'total': round(sum(orders.mapped('price_subtotal_incl')),3),
                     'gross':round(sum(orders.mapped('margin')),3),
-                    'gross_percent':round(sum(orders.mapped('margin_percent')),3)
+                    # 'gross_percent':round(sum(orders.mapped('margin_percent')),3)
                     }
+            if data['total']:
+                data['gross_percent'] = round((data['gross']/data['total'])*100,3)
+            else:
+                data['gross_percent'] = 0
             for method in methods:
                 globals()[method] = 0.00
                 for rec in orders:
@@ -59,10 +82,14 @@ class ReportsaleSummary(models.AbstractModel):
         end_date = form_data['end_date']
         payments = self.get_payment_methods()
         lines = self.sales_report_data(start_date,end_date)
-        tz = pytz.timezone('Asia/Dubai')
+        tz = pytz.timezone("America/Toronto")
         date_format = '%Y-%m-%d %H:%M:%S'
-        start_datetime = datetime.strptime(start_date, date_format)
-        start = pytz.utc.localize(start_datetime).astimezone(tz)
+        if type(start_date) == str:
+            start_datetime = datetime.strptime(start_date, date_format)
+            start = pytz.utc.localize(start_datetime).astimezone(tz)
+        else:
+            start = start_date
+
 
         docargs = {
             'doc_ids': docids,

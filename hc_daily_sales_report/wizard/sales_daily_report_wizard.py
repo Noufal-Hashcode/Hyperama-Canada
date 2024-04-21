@@ -7,7 +7,8 @@ import pytz
 class SalesDailyReportWizard(models.TransientModel):
     _name = 'daily.sales.report.wizard'
 
-    date = fields.Date('Date')
+    from_date = fields.Datetime('From Date')
+    to_date = fields.Datetime('To Date')
 
     def print_daily_report(self):
         self.ensure_one()
@@ -15,21 +16,19 @@ class SalesDailyReportWizard(models.TransientModel):
         form_data['company_id'] = self.env.company and self.env.company.id or False
 
         # tz = pytz.timezone('UTC')
-        # tz = pytz.timezone("America/Toronto")
-        tz = pytz.timezone('Asia/Dubai')
-        if self.date:
-            current_date = self.date
-            date = datetime.combine(current_date, time.min)
-            start = tz.localize(date)
-            form_data['start_date'] = start.astimezone(pytz.utc)
+        tz = pytz.timezone("America/Toronto")
+        # tz = pytz.timezone('Asia/Dubai')
+        if self.from_date:
+            # current_date = self.date
+            # date = self.from_date
+            # start = tz.localize(date)
+            form_data['start_date'] = self.from_date
         else:
             current_date = datetime.now().date()
             date = datetime.combine(current_date, time.min)
             start = tz.localize(date)
             form_data['start_date'] = start.astimezone(pytz.utc)
-        end = tz.localize(datetime.combine(current_date, time.max))
-        form_data['end_date'] = end.astimezone(pytz.utc)
-        print("fjdsjfkfj", form_data['start_date'], form_data['end_date'])
+        form_data['end_date'] = self.to_date
         data = {
             'ids': self.env.context.get('active_ids', []),
             'model': self.env.context.get('active_model', 'ir.ui.menu'),
@@ -48,13 +47,12 @@ class SalesDailyReportWizard(models.TransientModel):
         form_data = self.read()[0]
         form_data['company_id'] = self.env.company and self.env.company.id or False
         # tz = pytz.timezone(self.env.user.tz or 'UTC')
-        # tz = pytz.timezone("America/Toronto")
-        tz = pytz.timezone('Asia/Dubai')
-        if self.date:
-            current_date = self.date
-            date = datetime.combine(current_date, time.min)
-            start = tz.localize(date)
-            form_data['start_date'] = start.astimezone(pytz.utc)
+        tz = pytz.timezone("America/Toronto")
+        # tz = pytz.timezone('Asia/Dubai')
+        if self.from_date:
+        #     current_date = datetime.now().date()
+            form_data['start_date'] = self.from_date
+            # form_data['end_date'] = datetime(current_date + timedelta(hours=self.env.company.end_time))
         else:
             current_date = datetime.now().date()
             date = datetime.combine(current_date, time.min)

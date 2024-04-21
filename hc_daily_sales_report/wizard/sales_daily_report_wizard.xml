@@ -6,7 +6,8 @@
         <field name="arch" type="xml">
             <form string="Daily Sales">
                 <group>
-                    <field name="date"/>
+                    <field name="from_date"/>
+                    <field name="to_date"/>
                 </group>
                 <footer>
                     <button name="print_daily_report" string="Print"

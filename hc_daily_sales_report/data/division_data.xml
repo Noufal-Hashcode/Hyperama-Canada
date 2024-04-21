@@ -9,4 +9,7 @@
     <record id="diner_division" model="product.division">
         <field name="name">Diner</field>
     </record>
+    <record id="promotion_division" model="product.division">
+        <field name="name">Promotion</field>
+    </record>
 </odoo>
