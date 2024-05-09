@@ -3,7 +3,7 @@
       Design | Build | Deliver
 
 
-Odoo 16 odoo.sh project implemented by Hash Code IT Solutions, Dubai.
+Odoo 17 odoo.sh project implemented by Hash Code IT Solutions, Dubai.
 ##### Get in touch
      Hash Code IT,
      312, Al Fajer building A block,
