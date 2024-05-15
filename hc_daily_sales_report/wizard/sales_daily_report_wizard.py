@@ -58,11 +58,10 @@ class SalesDailyReportWizard(models.TransientModel):
             date = datetime.combine(current_date, time.min)
             # start = tz.localize(date)
             # start = date.astimezone(tz)
-            start = date - (timedelta(hours=4))
+            start = date - (timedelta(hours=12))
             form_data['start_date'] = start
-        end_t = datetime.combine(current_date, time.max)
         # end = end_t.astimezone(tz)
-        end = end_t - (timedelta(hours=4))
+        end = date + (timedelta(hours=12))
         form_data['end_date'] = end
         print("formhhg",date,datetime.combine(current_date, time.max),form_data['start_date'],form_data['end_date'],)
         context = dict(self.env.context)
