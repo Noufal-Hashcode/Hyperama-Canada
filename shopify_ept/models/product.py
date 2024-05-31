@@ -244,9 +244,9 @@ class ProductTemplate(models.Model):
 
         template = shopify_product_template_obj.browse(shopify_products.id)
         templates = template.filtered(lambda x: not x.exported_in_shopify)
-        if templates and len(templates) > 80:
-            raise UserError(_("Error:\n- System will not export more then 80 Products at a "
-                              "time.\n- Please select only 80 product for export."))
+        # if templates and len(templates) > 80:
+        #     raise UserError(_("Error:\n- System will not export more then 80 Products at a "
+        #                       "time.\n- Please select only 80 product for export."))
         shopify_instances = instance_obj.search([])
         for instance in shopify_instances:
             shopify_templates = templates.filtered(lambda product: product.shopify_instance_id == instance)
@@ -518,9 +518,9 @@ class ProductProduct(models.Model):
 
         template = shopify_product_template_obj.browse(shopify_products.id)
         templates = template.filtered(lambda x: not x.exported_in_shopify)
-        if templates and len(templates) > 80:
-            raise UserError(_("Error:\n- System will not export more then 80 Products at a "
-                              "time.\n- Please select only 80 product for export."))
+        # if templates and len(templates) > 80:
+        #     raise UserError(_("Error:\n- System will not export more then 80 Products at a "
+        #                       "time.\n- Please select only 80 product for export."))
         shopify_instances = instance_obj.search([])
         for instance in shopify_instances:
             shopify_templates = templates.filtered(lambda product: product.shopify_instance_id == instance)
