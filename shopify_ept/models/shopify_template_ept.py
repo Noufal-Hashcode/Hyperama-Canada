@@ -44,6 +44,7 @@ class ShopifyProductTemplateEpt(models.Model):
     created_at = fields.Datetime()
     updated_at = fields.Datetime()
     published_at = fields.Datetime()
+    weight_in_gram = fields.Float(string="Weight in Gram")
     website_published = fields.Selection([('unpublished', 'Unpublished'), ('published_web', 'Published in Web Only'),
                                           ('published_global', 'Published in Web and POS')],
                                          default='unpublished', copy=False, string="Published ?")

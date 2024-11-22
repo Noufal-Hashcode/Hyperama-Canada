@@ -8,20 +8,20 @@
             <xpath expr="//field[@name='categ_id']" position="after">
                 <field name="export_to_shopify"/>
                 <field name="shopify_instance_id" invisible="export_to_shopify != True"/>
-
+                <field name="weight_in_gram"/>
             </xpath>
         </field>
     </record>
-<!--     <record id="product_product_for_view_inherited_shopify" model="ir.ui.view">-->
-<!--            <field name="name">product_product_tree_view_inherit_family_code</field>-->
-<!--            <field name="model">product.product</field>-->
-<!--            <field name="inherit_id" ref="product.product_normal_form_view"/>-->
-<!--            <field name="arch" type="xml">-->
-<!--               <xpath expr="//field[@name='categ_id']" position="after">-->
-<!--                <field name="export_to_shopify"/>-->
-<!--                <field name="shopify_instance_id" invisible="export_to_shopify != True"/>-->
+    <!--     <record id="product_product_for_view_inherited_shopify" model="ir.ui.view">-->
+    <!--            <field name="name">product_product_tree_view_inherit_family_code</field>-->
+    <!--            <field name="model">product.product</field>-->
+    <!--            <field name="inherit_id" ref="product.product_normal_form_view"/>-->
+    <!--            <field name="arch" type="xml">-->
+    <!--               <xpath expr="//field[@name='categ_id']" position="after">-->
+    <!--                <field name="export_to_shopify"/>-->
+    <!--                <field name="shopify_instance_id" invisible="export_to_shopify != True"/>-->
 
-<!--            </xpath>-->
-<!--            </field>-->
-<!--        </record>-->
+    <!--            </xpath>-->
+    <!--            </field>-->
+    <!--        </record>-->
 </odoo>

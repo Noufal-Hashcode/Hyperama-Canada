@@ -14,6 +14,7 @@ class ProductTemplate(models.Model):
 
     shopify_instance_id = fields.Many2one("shopify.instance.ept")
     export_to_shopify = fields.Boolean(string='Export to Shopify', default=False)
+    weight_in_gram = fields.Float(string="Weight in Gram")
 
     # server action
     def action_shopify(self):
@@ -39,6 +40,7 @@ class ProductTemplate(models.Model):
         var.name=self.name
         product_template_ept = shopify_product_template_obj.search([('product_tmpl_id','=',self.id)])
         product_template_ept.name = self.name
+        product_template_ept.weight_in_gram =self.weight_in_gram
 
 
         start = time.time()
