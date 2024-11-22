@@ -452,7 +452,7 @@ class ShopifyProductProductEpt(models.Model):
         variant_vals.update({"barcode": variant.product_id.barcode or "",
                              "grams": int(variant.product_id.weight * 1000),
                              "weight": variant.product_id.product_tmpl_id.weight_in_gram,
-                             "weight_unit": "kg",
+                             "weight_unit": "g",
                              "requires_shipping": "true", "sku": variant.default_code,
                              "taxable": variant.taxable and "true" or "false",
                              "title": variant.name,
