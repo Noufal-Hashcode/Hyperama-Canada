@@ -204,6 +204,7 @@ class ShopifyProductProductEpt(models.Model):
         """
         odoo_product_obj = self.env["product.product"]
         sku = variation.get("sku")
+        weight_in_gram = variation.get("weight")
         barcode = variation.get("barcode") or False
         if barcode and barcode.__eq__("false"):
             barcode = False
@@ -221,6 +222,8 @@ class ShopifyProductProductEpt(models.Model):
             odoo_product.write({"default_code": sku})
         if barcode and odoo_product:
             odoo_product.write({"barcode": barcode})
+        if weight_in_gram:
+            odoo_product.product_tmpl_id.weight_in_gram= weight_in_gram
 
         return odoo_product
 
