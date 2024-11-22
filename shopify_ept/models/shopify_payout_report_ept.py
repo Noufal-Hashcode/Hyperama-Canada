@@ -371,7 +371,7 @@ class ShopifyPaymentReportEpt(models.Model):
                     reference = payment_reference.name
                     if not regenerate:
                         payment_aml_rec = payment_reference.line_ids.filtered(
-                            lambda line: line.account_internal_type == "liquidity")
+                            lambda line: line.account_type in ('asset_cash', 'liability_credit_card'))
                         reconciled, log_line = self.check_reconciled_transactions(transaction, payment_aml_rec)
                         if reconciled:
                             log_lines += log_line
