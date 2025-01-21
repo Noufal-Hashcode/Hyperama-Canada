@@ -1387,11 +1387,13 @@ class SaleOrder(models.Model):
         """
         for rec in self:
             if "done" in rec.picking_ids.mapped("state"):
-                rec.picking_ids.message_post(
-                    body=_("%s order is Canceled from Shopify store.", rec.shopify_order_number))
+                # rec.picking_ids.message_post(body=_("%s order is Canceled from Shopify store.", rec.shopify_order_number))
+                for picking in rec.picking_ids:
+                    picking.message_post(body=_("%s order is Canceled from Shopify store.", rec.shopify_order_number))
                 return False
             rec.action_cancel()
             rec.canceled_in_shopify = True
+        return True
 
     def create_shopify_refund(self, refunds_data, total_refund, created_by=""):
         """
