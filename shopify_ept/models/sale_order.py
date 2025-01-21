@@ -1385,12 +1385,13 @@ class SaleOrder(models.Model):
         Cancelled the sale order when it is cancelled in Shopify Store with full refund.
         @author: Haresh Mori @Emipro Technologies Pvt. Ltd on date 13-Jan-2020..
         """
-        if "done" in self.picking_ids.mapped("state"):
-            self.picking_ids.message_post(body=_("%s order is Canceled from Shopify store.", self.shopify_order_number))
-            return False
-        self.action_cancel()
-        self.canceled_in_shopify = True
-        return True
+        for rec in self:
+            if "done" in rec.picking_ids.mapped("state"):
+                rec.picking_ids.message_post(
+                    body=_("%s order is Canceled from Shopify store.", rec.shopify_order_number))
+                return False
+            rec.action_cancel()
+            rec.canceled_in_shopify = True
 
     def create_shopify_refund(self, refunds_data, total_refund, created_by=""):
         """
