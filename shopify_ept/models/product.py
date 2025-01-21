@@ -27,7 +27,7 @@ class ProductTemplate(models.Model):
         """ This method is used to call child method for update products values from shopify layer products to Shopify
             store. It calls from the Shopify layer product screen.
         """
-        # if not self.shopify_is_update_basic_detail and not self.shopify_is_publish and not self.shopify_is_set_price \
+        # if not self.shopify_is_update_basic_det   ail and not self.shopify_is_publish and not self.shopify_is_set_price \
         #         and not self.shopify_is_set_image:
         #     raise UserError("Please Select Any Option To Update Product.")
 
