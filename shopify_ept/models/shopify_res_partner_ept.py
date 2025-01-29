@@ -26,11 +26,15 @@ class ShopifyResPartnerEpt(models.Model):
         last_name = vals.get("last_name", "")
         email = vals.get("email", "")
 
-        if not first_name and not last_name and not email:
-            message = "First name, Last name and Email are not found in customer data."
-            model_id = common_log_line_obj.get_model_id("res.partner")
-            common_log_line_obj.shopify_create_customer_log_line(message, model_id, queue_line, log_book)
-            return False
+        first_name = shopify_customer_id
+        last_name = 'last name'
+        email = shopify_customer_id
+
+        # if not first_name and not last_name and not email:
+        #     message = "First name, Last name and Email are not found in customer data."
+        #     model_id = common_log_line_obj.get_model_id("res.partner")
+        #     common_log_line_obj.shopify_create_customer_log_line(message, model_id, queue_line, log_book)
+        #     return False
 
         name = ""
         if first_name:
