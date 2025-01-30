@@ -25,6 +25,7 @@ class ShopifyResPartnerEpt(models.Model):
         first_name = vals.get("first_name", "")
         last_name = vals.get("last_name", "")
         email = vals.get("email", "")
+        
 
         first_name = shopify_customer_id
         last_name = 'last name'
