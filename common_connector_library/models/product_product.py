@@ -20,7 +20,7 @@ class ProductProduct(models.Model):
         customer_locations = self.env['stock.location'].search([('usage', '=', 'customer')])
         route_ids = self.route_ids | self.categ_id.route_ids
         stock_rule = self.env['stock.rule'].search([('company_id', '=', self.env.company.id), ('action', '=', 'buy'),
-                                                    ('location_id', 'in', customer_locations.ids),
+                                                    ('location_dest_id', 'in', customer_locations.ids),
                                                     ('route_id', 'in', route_ids.ids)])
         if stock_rule:
             self.is_drop_ship_product = True
