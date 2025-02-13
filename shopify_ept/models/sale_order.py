@@ -313,6 +313,7 @@ class SaleOrder(models.Model):
 
             order_number = order_response.get("order_number")
             shopify_financial_status = order_response.get("financial_status")
+            fulfillment_status = order_response.get("fulfillment_status")
             _logger.info("Started processing Shopify order(%s) and order id is(%s)", order_number,
                          order_response.get("id"))
 
@@ -349,6 +350,9 @@ class SaleOrder(models.Model):
 
             sale_order = self.shopify_create_order(instance, partner, delivery_address, invoice_address,
                                                    order_data_line, order_response, log_book, lines, order_number)
+            if fulfillment_status=='fulfilled':
+                print('fulfillment_status')
+                sale_order.action_confirm()
             if not sale_order:
                 message = "Configuration missing in Odoo while importing Shopify Order(%s) and id (%s)" % (
                     order_number, order_response.get("id"))
@@ -358,6 +362,7 @@ class SaleOrder(models.Model):
             order_ids.append(sale_order.id)
 
             location_vals = self.set_shopify_location_and_warehouse(order_response, instance, pos_order)
+
             sale_order.write(location_vals)
 
             risk_result = shopify.OrderRisk().find(order_id=order_response.get("id"))
