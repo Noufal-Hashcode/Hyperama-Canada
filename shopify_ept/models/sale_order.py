@@ -350,7 +350,7 @@ class SaleOrder(models.Model):
 
             sale_order = self.shopify_create_order(instance, partner, delivery_address, invoice_address,
                                                    order_data_line, order_response, log_book, lines, order_number)
-            if fulfillment_status=='fulfilled':
+            if sale_order and fulfillment_status=='fulfilled':
                 print('fulfillment_status')
                 sale_order.action_confirm()
             if not sale_order:
