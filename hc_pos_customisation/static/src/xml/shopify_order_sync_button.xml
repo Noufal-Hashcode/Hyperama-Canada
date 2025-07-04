@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="hc_pos_customisation.ShopifySyncButton">
+
+        <button class="control-button shopify-sync-button btn btn-light rounded-0 fw-bolder" t-on-click="() => this.click()">
+            <i class="fa fa-cart-arrow-down me-1" role="img" aria-label="Sync Shopify Order" title="Sync Shopify Order" />
+            Sync Shopify Order
+        </button>
+    </t>
+
+</templates>
