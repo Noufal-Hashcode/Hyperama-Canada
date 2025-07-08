@@ -12,10 +12,16 @@ export class ShopifySyncButton extends Component {
         this.rpc = useService("rpc");
     }
     async click() {
-        try {
-          const pos = this.pos;
-          const rpc = this.rpc;
-          const orders = await rpc("/pos/shopify_orders", {});
+      const pos = this.pos;
+      const rpc = this.rpc;
+      let offset = 0;
+      const limit = 50;
+
+      try {
+        while (true) {
+          const orders = await rpc("/pos/shopify_orders", { limit, offset });
+          if (!orders.length) break;
+
           for (const orderData of orders) {
             const order = pos.add_new_order();
 
@@ -36,10 +42,13 @@ export class ShopifySyncButton extends Component {
 
             order.shopify_order_id = orderData.order_id;
           }
-        } catch (error) {
-          console.error("Shopify sync failed", error);
+
+          offset += limit;
         }
-    }
+      } catch (error) {
+        console.error("Shopify sync failed", error);
+      }
+  }
 }
 
 ProductScreen.addControlButton({
