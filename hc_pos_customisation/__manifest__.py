@@ -29,9 +29,9 @@
             'hc_pos_customisation/static/src/xml/pos.xml',
             'hc_pos_customisation/static/src/app/js/models.js',
             'hc_pos_customisation/static/src/js/pos_screen_button.js',
-            'hc_pos_customisation/static/src/js/pos_ticket_screen.js',
+            # 'hc_pos_customisation/static/src/js/pos_ticket_screen.js',
             'hc_pos_customisation/static/src/xml/shopify_order_sync_button.xml',
-            'hc_pos_customisation/static/src/xml/ticket_screen_extend.xml'
+            # 'hc_pos_customisation/static/src/xml/ticket_screen_extend.xml'
 
         ],
         },
