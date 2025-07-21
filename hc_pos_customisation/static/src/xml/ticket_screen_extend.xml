@@ -2,12 +2,20 @@
 <templates id="template" xml:space="preserve">
 
     <t t-name="hc_pos_customisation.TicketScreenExtend" t-inherit="point_of_sale.TicketScreen" t-inherit-mode="extension">
+        <xpath expr="//div[contains(@class, 'header-row')]/div[.='Date']" position="after">
+            <div class="col p-2">Shopify Order Date</div>
+        </xpath>
         <xpath expr="//div[contains(@class, 'header-row')]/div[.='Customer']" position="before">
             <div class="col p-2">Order Reference</div>
         </xpath>
+        <xpath expr="//div[contains(@class, 'order-row')]/div[@class='col wide p-2'][position()=1]" position="before">
+            <div class="col p-2">
+                <div><t t-esc="getOrderValue(order).date"></t></div>
+            </div>
+        </xpath>
         <xpath expr="//div[contains(@class, 'order-row')]/div[@class='col wide p-2'][position()=2]" position="after">
             <div class="col p-2">
-                <div><t t-esc="getOrderReference(order)"></t></div>
+                <div><t t-esc="getOrderValue(order).name"></t></div>
             </div>
         </xpath>
     </t>

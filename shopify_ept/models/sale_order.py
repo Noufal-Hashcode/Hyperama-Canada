@@ -90,6 +90,7 @@ class SaleOrder(models.Model):
                                               help="It is used to identify that order has multi-payment gateway or not")
     shopify_payment_ids = fields.One2many('shopify.order.payment.ept', 'order_id',
                                           string="Payment Lines")
+    shopify_order_date = fields.Datetime(string="Shopify Order Date", readonly=True, copy=False)
 
     _sql_constraints = [('unique_shopify_order',
                          'unique(shopify_instance_id,shopify_order_id,shopify_order_number)',
@@ -645,6 +646,7 @@ class SaleOrder(models.Model):
             "partner_shipping_id": shipping_address.ids[0],
             "warehouse_id": instance.shopify_warehouse_id.id if instance.shopify_warehouse_id else False,
             "date_order": date_order,
+            "shopify_order_date":date_order,
             "state": "draft",
             "pricelist_id": pricelist_id.id if pricelist_id else False,
             "team_id": instance.shopify_section_id.id if instance.shopify_section_id else False,
