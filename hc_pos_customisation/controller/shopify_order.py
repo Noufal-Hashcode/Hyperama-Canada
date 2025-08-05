@@ -40,6 +40,7 @@ class PosShopifySyncController(http.Controller):
                     'product_id': line.product_id.id,
                     'qty': line.product_uom_qty,
                     'price_unit': line.price_unit,
+                    'tax_ids_after_fiscal_position': [(6, 0, line.tax_id.ids)],
                 }
                 for line in order.order_line
             ],
