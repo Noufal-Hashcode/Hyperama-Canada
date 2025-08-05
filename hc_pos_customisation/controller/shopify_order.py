@@ -17,7 +17,7 @@ class PosShopifySyncController(http.Controller):
         query = """
             SELECT id FROM sale_order
             WHERE state = 'sale'
-            AND synced_with_pos IS NULL
+            AND synced_with_pos IS Not True
             AND shopify_order_id != 'f'
             ORDER BY write_date DESC
             LIMIT %s OFFSET %s
