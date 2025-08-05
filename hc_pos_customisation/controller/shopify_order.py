@@ -30,7 +30,6 @@ class PosShopifySyncController(http.Controller):
         sale_orders = request.env['sale.order'].browse(ids).filtered(
             lambda sale: not sale.pos_order_line_ids.mapped('order_id')
         )
-
         result = [{
             'order_id': order.id,
             'name': order.name,
@@ -40,7 +39,7 @@ class PosShopifySyncController(http.Controller):
                     'product_id': line.product_id.id,
                     'qty': line.product_uom_qty,
                     'price_unit': line.price_unit,
-                    'tax_ids': [(6, 0, line.tax_id.ids)],
+                    'tax_ids': line.tax_id.ids,
                 }
                 for line in order.order_line
             ],
